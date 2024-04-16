@@ -6,6 +6,11 @@
         {
             Console.WriteLine("Hello, World!");
             // Det her er en ny ændring i mit program
+
+            while (true)
+            {
+
+            }
         }
     }
 }

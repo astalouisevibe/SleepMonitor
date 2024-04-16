@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SleepMonitor
 {
-    internal class Controller
+    public class Controller
     {
+        List<Controller> Sleepdata = new List<Controller>();
+       
+        
     }
 }
