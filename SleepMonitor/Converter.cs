@@ -8,5 +8,6 @@ namespace SleepMonitor
 {
     internal class Converter
     {
+        
     }
 }
