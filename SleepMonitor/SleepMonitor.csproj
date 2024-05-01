@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AU.RaspberryPi.RaspberryPiDll" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>

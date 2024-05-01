@@ -1,4 +1,5 @@
-﻿namespace SleepMonitor
+﻿using RaspberryPiNetDll;
+namespace SleepMonitor
 {
     internal class Program
     {
