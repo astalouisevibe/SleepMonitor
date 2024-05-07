@@ -1,4 +1,6 @@
-﻿namespace SleepMonitor
+﻿using RaspberryPiNetDll;
+using Meadow; // Det her er ADC nugetpakken
+namespace SleepMonitor
 {
     internal class Program
     {
