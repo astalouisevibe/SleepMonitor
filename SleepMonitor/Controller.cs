@@ -6,6 +6,8 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using RaspberryPiNetDll;
+using Meadow; // Det her er ADC - nuggetpakken
+
 
 namespace SleepMonitor
 {
@@ -35,7 +37,7 @@ namespace SleepMonitor
             stopwatch.Start();
             while (true)
             {
-             //   Sleepdata.Add();
+            // Sleepdata.Add();
             }
             return 0;
            

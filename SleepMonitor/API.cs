@@ -15,15 +15,15 @@ namespace SleepMonitor
 
         public void DataToJsonFile(string filePath)
         {
-            float data = controller.GetData();
+    //        float data = controller.GetData();
 
-            var jsonData = new { Data = data };
+    //        var jsonData = new { Data = data };
 
 
-            string json = JsonSerializer.Serialize(jsonData);
+   //         string json = JsonSerializer.Serialize(jsonData);
 
-            File.WriteAllText(filePath, json);
-            Console.WriteLine("Data exporteret som JsonFil");
+    //        File.WriteAllText(filePath, json);
+    //        Console.WriteLine("Data exporteret som JsonFil");
         }
     }
 }
