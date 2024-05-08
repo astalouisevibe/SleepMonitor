@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Spi;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Iot.Device.Adc;
 
 namespace SleepMonitor
 {
@@ -15,11 +17,13 @@ namespace SleepMonitor
         private static Timer timer;
 
 
+
         // Field: Number of single ended input channel on the ADC
         protected new byte ChannelCount;
 
         // Property, input value
         public double ReferenceVoltage { get; set; }
+        public int channel { get; private set; }
 
         // Contrcutor, (extern?)
         public Adc()
@@ -36,9 +40,9 @@ namespace SleepMonitor
         //Methods
 
         // Read value from ADC
-        public virtual int AdcSpi(int channel)
+        public virtual int AdcSpi()
         {
-            Console.WriteLine($"Input value is {channel}");
+
             return mcp.Read(channel);
 
         }
@@ -60,3 +64,4 @@ namespace SleepMonitor
             }
         }
     }
+}
