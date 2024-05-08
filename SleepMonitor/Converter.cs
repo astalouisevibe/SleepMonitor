@@ -12,10 +12,10 @@ namespace SleepMonitor
     internal class Converter
     {
         private RaspberryPiDll raspberryPi;
-        private ADC adc;
+        private Mcp3008 adc;
 
 
-        public Converter(RaspberryPiDll raspberryPi, ADC adc)
+        public Converter(RaspberryPiDll raspberryPi, Mcp3008 adc)
         {
             this.raspberryPi = raspberryPi;
             this.adc = adc;
@@ -30,13 +30,14 @@ namespace SleepMonitor
             return Convert.ToInt16(BCD, 2);
         }
 
-        public class ADC
+        public class Mcp3008
         {
+           
 
             private int channel;
             private float referenceVoltage;
 
-            public ADC(int channel, float referenceVoltage)
+            public Mcp3008(int channel, float referenceVoltage)
             {
                 this.channel = channel;
                 this.referenceVoltage = referenceVoltage;

@@ -1,9 +1,11 @@
 ﻿using RaspberryPiNetDll;
-using Meadow; // Det her er ADC nugetpakken
+
+
 namespace SleepMonitor
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
@@ -19,6 +21,8 @@ namespace SleepMonitor
             
             // asta 3
             // andrea
+
+            
         }
     }
 }
