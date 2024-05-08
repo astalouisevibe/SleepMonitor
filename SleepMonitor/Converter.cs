@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RaspberryPiNetDll;
 using static RaspberryPiNetDll.Led;
+using Iot.Device.Adc;
 
 namespace SleepMonitor
 {

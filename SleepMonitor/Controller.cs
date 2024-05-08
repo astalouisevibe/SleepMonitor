@@ -21,8 +21,6 @@ namespace SleepMonitor
         
         List<Controller> Sleepdata = new List<Controller>();
         public List<double> TempMeas { get; private set; } = new List<double>();
-        public List<List<double>> FiveMinMeas { get;  set; } = new List<List<double>>();
-        public List<List<double>> CreateTask { get; private set; } = new List<List<double>>();
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
