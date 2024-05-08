@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace SleepMonitor
 {
-    public class Patient
-    {
-        public int PatientIdentifier { get; set; }
-        public string PatientName { get; set;}
-        public string PatientCommunicationLanguage { get; set;}
+    // Extention 3.0
+    //public class Patient
+    //{
+    //    public int PatientIdentifier { get; set; }
+    //    public string PatientName { get; set;}
+    //    public string PatientCommunicationLanguage { get; set;}
 
 
-    }
+    //}
 
     public class Observations
     {

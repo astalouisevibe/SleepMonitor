@@ -16,8 +16,6 @@ using UnitsNet;
 namespace SleepMonitor
 {
     public class Controller
-
-        // Lærke Test
     {
         public Stopwatch stopwatch;
         
@@ -25,6 +23,8 @@ namespace SleepMonitor
         public List<double> TempMeas { get; private set; } = new List<double>();
         public List<List<double>> FiveMinMeas { get;  set; } = new List<List<double>>();
         public List<List<double>> CreateTask { get; private set; } = new List<List<double>>();
+        public List<double> FiveMinMeas { get; private set; } = new List<double>();
+        public List<double> CreateTask { get; private set; } = new List<double>();
 
         // private static Timer timer; Nødvendig?
         private Adc adc;
