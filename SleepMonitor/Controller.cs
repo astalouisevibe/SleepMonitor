@@ -11,7 +11,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Device.Spi;
 using System.Threading;
 using Iot.Device.Adc; // ADC nuget-pakke
-
+using UnitsNet;
 
 namespace SleepMonitor
 {
@@ -23,7 +23,7 @@ namespace SleepMonitor
         
         List<Controller> Sleepdata = new List<Controller>();
         public List<double> TempMeas { get; private set; } = new List<double>();
-        public List<List<double>> FiveMinMeas { get; private set; } = new List<List<double>>();
+        public List<List<double>> FiveMinMeas { get;  set; } = new List<List<double>>();
         public List<List<double>> CreateTask { get; private set; } = new List<List<double>>();
 
         // private static Timer timer; Nødvendig?
@@ -32,6 +32,7 @@ namespace SleepMonitor
         public Controller() 
         { 
             stopwatch = new Stopwatch();
+            adc = new Adc();
         }
        
         public int ReadFlexSensorValue() // Method to read the value of the long flex sensor
@@ -71,7 +72,7 @@ namespace SleepMonitor
 
                 double average = TempMeas.Average();
                 TempMeas.Clear();
-                FiveMinMeas.Add(new List<double>(average));
+                FiveMinMeas.Add(new List<double>((int)average));
                 // skal ændres til at være average, men average er ikke en liste
                 // og kan derfor ikke tilføjjes. Hvordan gøres det?
 
