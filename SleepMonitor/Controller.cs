@@ -17,6 +17,8 @@ using Iot.Device.Adc;
 namespace SleepMonitor
 {
     public class Controller
+
+        // Lærke Test
     {
         public Stopwatch stopwatch;
         
