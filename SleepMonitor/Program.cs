@@ -19,7 +19,7 @@ namespace SleepMonitor
             // Lærke
             // asta 2
             // Lærke 2
-            // Jakob
+            
             // asta 3
             // andrea
 
