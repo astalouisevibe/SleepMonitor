@@ -6,12 +6,11 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using RaspberryPiNetDll;
-using Meadow; // Det her er ADC - nuggetpakken
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Device.Spi;
 using System.Threading;
-using Iot.Device.Adc;
+using Iot.Device.Adc; // ADC nuget-pakke
 
 
 namespace SleepMonitor

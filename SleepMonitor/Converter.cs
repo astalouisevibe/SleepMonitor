@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Meadow.Foundation.ICs.IOExpanders;
 using RaspberryPiNetDll;
 using static RaspberryPiNetDll.Led;
 

@@ -1,6 +1,5 @@
 ﻿using RaspberryPiNetDll;
-using Meadow; // Det her er ADC nugetpakken
-using Meadow.Foundation.ICs.IOExpanders;
+
 
 namespace SleepMonitor
 {
