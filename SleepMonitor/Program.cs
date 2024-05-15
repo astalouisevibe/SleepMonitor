@@ -3,28 +3,11 @@
 
 namespace SleepMonitor
 {
-    internal class Program
+    public class Program
     {
-        
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
-            while (true)
-            {
-
-            }
-            // Asta
-            // Lærke
-            // asta 2
-            // Lærke 2
-            
-            // asta 3
-            // andrea
-            // asta 4
-            // Lærke #
-
-            
+          
         }
     }
 }

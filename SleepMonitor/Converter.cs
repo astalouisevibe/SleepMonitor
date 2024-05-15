@@ -14,16 +14,16 @@ namespace SleepMonitor
 {
     public  class Converter
     {
-        // skal der oprettes instanser af RaspberryPi og Adc'en
-        private RaspberryPiDll raspberryPi;
-        private Adc adc;
+        //// skal der oprettes instanser af RaspberryPi og Adc'en?
+        //private RaspberryPiDll raspberryPi;
+        //private Adc adc;
 
 
-        public Converter(RaspberryPiDll raspberryPi, Adc adc)
-        {
-            this.raspberryPi = raspberryPi;
-            this.adc = adc;
-        }
+        //public Converter(RaspberryPiDll raspberryPi, Adc adc)
+        //{
+        //    this.raspberryPi = raspberryPi;
+        //    this.adc = adc;
+        //}
 
         // Denne metode er fra 1. semester --> kan ikke bruges i dette projekt
         //public int ConvertToBCD(int value)
@@ -51,9 +51,10 @@ namespace SleepMonitor
 
         //}
         // Method to convert the specified analog voltage to a digital value
-        public double ConvertBitToVolt(double value)
+        public double ConvertBitToVolt(double BitValue)
         {
-            double BitValue = adc.ReadDigitalValue();
+            //double BitValue = adc.ReadDigitalValue();
+            
 
             // express in percentage, rounds up to the nearest 10'th
             double PercentValue = Math.Round(BitValue / 10.23);
@@ -66,9 +67,9 @@ namespace SleepMonitor
             Debug.WriteLine($"{VoltValue}%");
 
             return VoltValue;
-
+            
             // waits 500 ms before it measures again
-            Thread.Sleep(500);
+            // Thread.Sleep(500); kan ikke "sleep" efter return
            
             // Placeholder code for analog to digital conversion
             // Replace it with actual implementation

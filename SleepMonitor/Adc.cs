@@ -12,7 +12,7 @@ namespace SleepMonitor
     public class Adc
     {
         // Pseudo værdi
-        private double value = 20;
+        //private double value = 20;
 
         private Mcp3008 mcp;
         private static Timer timer;
@@ -56,16 +56,13 @@ namespace SleepMonitor
 
         public double ReadDigitalValue() // --> trådfunktion / thread
         {
-            //  return ReadAdc(ChannelCount);
-            while (true)
-            {
-                Console.Clear();
-                // values is between 0 and 1023
-                double value = mcp.Read(0);
-                Console.WriteLine($"{value}");
-
-
-            }
+            ////  return ReadAdc(ChannelCount);
+            //    Console.Clear();
+            //    // values is between 0 and 1023
+            //    double value = mcp.Read(0);
+            //    Console.WriteLine($"{value}");
+            //    Thread.Sleep(250);
+            return 0;
         }
     }
 }
