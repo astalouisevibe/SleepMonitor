@@ -21,8 +21,6 @@ namespace SleepMonitor
         
         List<Controller> Sleepdata = new List<Controller>();
         public List<double> TempMeas { get; private set; } = new List<double>();
-        public List<List<double>> FiveMinMeas { get;  set; } = new List<List<double>>();
-        public List<List<double>> CreateTask { get; private set; } = new List<List<double>>();
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
@@ -50,7 +48,10 @@ namespace SleepMonitor
             stopwatch.Start();
             while (true)
             {
-            // Sleepdata.Add();
+            // value = adc.take
+            // volt = converter.convert to volt(value)
+            // logging?
+            // check for updates // events
             }
             return 0;
            
@@ -67,14 +68,12 @@ namespace SleepMonitor
                     readings.Add(voltage);
                     Thread.Sleep(1000);
                 }
-                //int OneMin = TimeSpan.Duration(1).TotalMinutes; 
+                // int OneMin = TimeSpan.Duration(1).TotalMinutes; 
                 // Kan denne linje bruge til at sætte siden til 1 minut???
 
                 double average = TempMeas.Average();
                 TempMeas.Clear();
-                FiveMinMeas.Add(new List<double>((int)average));
-                // skal ændres til at være average, men average er ikke en liste
-                // og kan derfor ikke tilføjjes. Hvordan gøres det?
+                FiveMinMeas.Add(average);
 
                 Console.WriteLine($"Average voltage for the minute: {average}");
 

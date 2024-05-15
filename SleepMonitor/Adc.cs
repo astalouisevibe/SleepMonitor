@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Device.Spi;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +31,18 @@ namespace SleepMonitor
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
             var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
+            // i2cdetect -y 1
+
+            // ** kode modtaget af Lars Mortensen: 
+            //var hardwareSpiSettings = new SpiConnectionSettings(1, 42)
+            //{
+            //    ClockFrequency = 1000000
+            //};
 
             // The object that actively communicates with the device, take the previous object as a parameter
             SpiDevice spi = SpiDevice.Create(hardwareSpiSettings);
-            var mcp = new Mcp3008(spi);
+            mcp = new Mcp3008(spi); // instantiere
+           
         }
 
 
@@ -41,13 +50,11 @@ namespace SleepMonitor
 
         // Read value from ADC
         public virtual int AdcSpi()
-        {
-
+        { 
             return mcp.Read(channel);
-
         }
 
-        public double ConvertToDigital() // --> trådfunktion / thread
+        public double ReadDigitalValue() // --> trådfunktion / thread
         {
             //  return ReadAdc(ChannelCount);
             while (true)
@@ -56,11 +63,8 @@ namespace SleepMonitor
                 // values is between 0 and 1023
                 double value = mcp.Read(0);
                 Console.WriteLine($"{value}");
-                // express in percentage, rounds up to the nearest 10'th
-                Console.WriteLine($"{Math.Round(value / 10.23, 1)}%");
-                // waits 500 ms before it measures again
-                return (value * 3.3) / 1023;
-                Thread.Sleep(500);
+
+
             }
         }
     }
