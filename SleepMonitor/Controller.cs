@@ -37,7 +37,7 @@ namespace SleepMonitor
             converter = new Converter();
             _rpi = new RaspberryPiDll();
             B2 = new Keys(_rpi, Keys.KEYS.SW2);
-            adc = new Adc();
+            adc = new Adc(bitValue);
         }
 
 

@@ -10,6 +10,7 @@ using Iot.Device.Adc;
 namespace SleepMonitor
 {
     // DEN RIGTIGE KLASSE TIL ADC
+    /*
     public class Adc
     {
         private Mcp3008 mcp;
@@ -37,7 +38,7 @@ namespace SleepMonitor
              return value;
          }
      } 
-
+    */
 
 
 
@@ -46,7 +47,7 @@ namespace SleepMonitor
 
 
         // SIMULERET METODE TIL AT LÆSE FAST DIGITAL VÆRDI
-        /*
+        
         public class Adc
             {
                 private double fixedValue;
@@ -62,7 +63,7 @@ namespace SleepMonitor
                     return fixedValue;
                 }
             }
-        */
+        
     }
 
 
