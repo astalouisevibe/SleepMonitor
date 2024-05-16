@@ -9,6 +9,7 @@ namespace SleepMonitor
         {
             RaspberryPiDll _rpi = new RaspberryPiDll();
             RaspberryPiNetDll.Keys B1 = new Keys(_rpi, Keys.KEYS.SW1);
+            Controller controller = new Controller();
 
             if (!_rpi.Open())
             {
@@ -19,14 +20,20 @@ namespace SleepMonitor
 
             while (true)
             {
-                // Tjek om knappen er blevet trykket
-                if (B1.KeyPressed == 1)
-                {
-                    Controller.startreadning
-                }
 
-                  
+     
+                    controller.StartReading();
+
+
+                    // Tjek om knappen er blevet trykket
+                    /*if (B1.KeyPressed == 1)
+                    {
+                        controller.StartReading();
+
+                    }
+                    */
+
+                }
             }
-        }
     }
 }

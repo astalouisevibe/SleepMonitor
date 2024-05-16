@@ -22,8 +22,7 @@ namespace SleepMonitor
         public double Threashold = 3.0; // tilpasses
 
         public Stopwatch stopwatch;
-        public Converter converter = new Converter();
-        
+        public Converter converter;
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
