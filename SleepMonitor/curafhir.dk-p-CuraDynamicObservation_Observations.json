@@ -1,0 +1,1532 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "CuraDynamicObservation",
+  "meta": {
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/StructureDefinition" ]
+  },
+  "extension": [ {
+    "url": "http://curafhir.dk/x/curaStructureDefinitionDomain",
+    "valueCoding": {
+      "system": "http://curafhir.dk/cs/domain-type-enum-valueset",
+      "code": "Observations"
+    }
+  } ],
+  "url": "http://curafhir.dk/p/CuraDynamicObservation",
+  "name": "CuraDynamicObservation",
+  "status": "active",
+  "publisher": "Systematic",
+  "description": "An observation documented on a citizen.",
+  "fhirVersion": "1.0.2",
+  "kind": "resource",
+  "constrainedType": "Observation",
+  "abstract": false,
+  "base": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "snapshot": {
+    "element": [ {
+      "path": "Observation",
+      "definition": "An observation documented on a citizen.",
+      "type": [ {
+        "code": "Observation"
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "slicing": {
+        "discriminator": [ "url" ],
+        "ordered": false,
+        "rules": "open"
+      },
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-de4d8dba",
+      "short": "Contains information about the last user that marked the observation as unfinished",
+      "definition": "Contains information about the last user that marked the observation as unfinished",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/unfinished" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-97f61acc",
+      "short": "This instruction will contain a link and a title for an instruction for a dynamic observation.",
+      "definition": "This instruction will contain a link and a title for an instruction for a dynamic observation.",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/DynamicObservationInstructionLink" ]
+      } ]re
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-a4608460",
+      "short": "Context in which the observation exists, e.g. casework/request task",
+      "definition": "Context in which the observation exists, e.g. casework/request task",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/context" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-76fc5a9b",
+      "short": "Contains information about all user roles for which this observation is relevant.",
+      "definition": "Contains information about all user roles for which this observation is relevant.",
+      "min": 1,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/relevantForUserRole" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-b8db6402",
+      "short": "Contains information about which conditions this observation is relevant for.",
+      "definition": "Contains information about which conditions this observation is relevant for.",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/conditionReference" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-a2812cf7",
+      "short": "Linked VUM themes. Should contain only level 2 codings from FFBCondition-classification",
+      "definition": "Linked VUM themes. Should contain only level 2 codings from FFBCondition-classification",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/theme" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-17a3817b",
+      "short": "Linked VUM sub-themes. Should contain only level 3 codings from FFBCondition-classification",
+      "definition": "Linked VUM sub-themes. Should contain only level 3 codings from FFBCondition-classification",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/subTheme" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e2351834",
+      "short": "The type of observation, e.g. clinical or case observation",
+      "definition": "The type of observation, e.g. clinical or case observation",
+      "min": 1,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/informationType" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e71835d4",
+      "short": "Whether the observation default leaves a task",
+      "definition": "Whether the observation default leaves a task",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/isFollowUpTaskEnabled" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-83b779c8",
+      "short": "Whether multiple tasks may be added for this observation type",
+      "definition": "Whether multiple tasks may be added for this observation type",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/multipleFollowUpTasksAllowed" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-8257281c",
+      "short": "Whether the observation is stepwise documented",
+      "definition": "Whether the observation is stepwise documented",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/stepwiseDocumented" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-96c7c7cb",
+      "short": "Whether there is a previous step in the documentation",
+      "definition": "Whether there is a previous step in the documentation",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/hasPreviousStep" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e91e2671",
+      "short": "Next step in the documentation",
+      "definition": "Next step in the documentation",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/nextStep" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-543f0a0e",
+      "short": "Whether observation should be visible in Cura Dialog",
+      "definition": "Whether observation should be visible in Cura Dialog",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/visibleInCuraDialog" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-992ab1a8",
+      "short": "The calculation values of the items selected in the selection lists.",
+      "definition": "The calculation values of the items selected in the selection lists.",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/selectedItemCalculationValue" ]
+      } ]
+    }, {
+      "path": "Observation.meta",
+      "short": "Metadata about the resource",
+      "definition": "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.meta",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Meta",
+        "profile": [ "http://curafhir.dk/p/CuraMeta" ]
+      } ]
+    }, {
+      "path": "Observation.identifier",
+      "short": "id",
+      "definition": "A unique identifier for the simple observation instance.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.identifier",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "Identifier",
+        "profile": [ "http://curafhir.dk/p/CuraIdentifier" ]
+      } ]
+    }, {
+      "path": "Observation.status",
+      "short": "status",
+      "definition": "The status of the result value",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.status",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "code"
+      } ],
+      "binding": {
+        "strength": "required",
+        "valueSetUri": "http://hl7.org/fhir/ValueSet/observation-status"
+      }
+    }, {
+      "path": "Observation.category",
+      "short": "class",
+      "definition": "A code that classifies the general type of observation being made.  This is used  for searching, sorting and display purposes.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.category",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.code",
+      "short": "what",
+      "definition": "Describes what was observed. Sometimes this is called the observation \"name\"",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.code",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConceptRepeatedCoding" ]
+      } ]
+    }, {
+      "path": "Observation.subject",
+      "short": "who.focus",
+      "definition": "The patient, or group of patients, location, or device whose characteristics (direct or indirect) are described by the observation and into whose record the observation is placed.  Comments: Indirect characteristics may be those of a specimen, fetus, donor,  other observer (for example a relative or EMT), or any observation made about the subject.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.subject",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraCitizen" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.encounter",
+      "short": "context",
+      "definition": "The healthcare event  (e.g. a patient and healthcare provider interaction) during which this observation is made",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.encounter",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.effective[x]",
+      "short": "when.done",
+      "definition": "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.effective[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      } ]
+    }, {
+      "path": "Observation.issued",
+      "short": "when.recorded",
+      "definition": "The date and time this observation was made available to providers, typically after the results have been reviewed and verified.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.issued",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "instant"
+      } ]
+    }, {
+      "path": "Observation.performer",
+      "short": "who.actor",
+      "definition": "Who was responsible for creating observation",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.performer",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraPractitioner" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraCitizen" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraRelatedPerson" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.value[x]",
+      "short": "The information determined as a result of making the observation, if the information has a simple value",
+      "definition": "The information determined as a result of making the observation, if the information has a simple value",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.value[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity"
+      }, {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      }, {
+        "code": "string"
+      }, {
+        "code": "Range"
+      }, {
+        "code": "Ratio"
+      }, {
+        "code": "SampledData"
+      }, {
+        "code": "Attachment"
+      }, {
+        "code": "time"
+      }, {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      } ]
+    }, {
+      "path": "Observation.dataAbsentReason",
+      "short": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "definition": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.dataAbsentReason",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.interpretation",
+      "short": "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag.",
+      "definition": "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.interpretation",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.comments",
+      "short": "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.",
+      "definition": "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.",
+      "min": 0,
+      "max": "1",
+      "base": {
+        "path": "Observation.comments",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "string"
+      } ]
+    }, {
+      "path": "Observation.bodySite",
+      "short": "Indicates the site on the subject's body where the observation was made (i.e. the target site).",
+      "definition": "Indicates the site on the subject's body where the observation was made (i.e. the target site).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.bodySite",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.method",
+      "short": "Indicates the mechanism used to perform the observation",
+      "definition": "Indicates the mechanism used to perform the observation",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.method",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.specimen",
+      "short": "The specimen that was used when this observation was made",
+      "definition": "The specimen that was used when this observation was made",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.specimen",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Specimen" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.device",
+      "short": "The device used to generate the observation data.",
+      "definition": "The device used to generate the observation data.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.device",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Device" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/DeviceMetric" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange",
+      "name": "ReferenceRange",
+      "short": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "definition": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.extension",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.low",
+      "short": "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).",
+      "definition": "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.low",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/SimpleQuantity" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.high",
+      "short": "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).",
+      "definition": "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.high",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/SimpleQuantity" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.meaning",
+      "short": "Code for the meaning of the reference range",
+      "definition": "Code for the meaning of the reference range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.meaning",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.age",
+      "short": "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so",
+      "definition": "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.age",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Range"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.text",
+      "short": "Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \"Negative\" or a list or table of 'normals'.",
+      "definition": "Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \"Negative\" or a list or table of 'normals'.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.text",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "string"
+      } ]
+    }, {
+      "path": "Observation.related",
+      "name": "Related",
+      "short": "A  reference to another resource (usually another Observation but could  also be a QuestionnaireAnswer) whose relationship is defined by the relationship type code.",
+      "definition": "A  reference to another resource (usually another Observation but could  also be a QuestionnaireAnswer) whose relationship is defined by the relationship type code.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.related.extension",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.related.type",
+      "short": "A code specifying the kind of relationship that exists with the target resource",
+      "definition": "A code specifying the kind of relationship that exists with the target resource",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related.type",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "code"
+      } ],
+      "binding": {
+        "strength": "required",
+        "valueSetUri": "http://hl7.org/fhir/ValueSet/observation-relationshiptypes"
+      }
+    }, {
+      "path": "Observation.related.target",
+      "short": "A reference to the observation or [[[QuestionnaireResponse]]] resource that is related to this observation",
+      "definition": "A reference to the observation or [[[QuestionnaireResponse]]] resource that is related to this observation",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related.target",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Observation" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.component",
+      "name": "Component",
+      "short": "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.",
+      "definition": "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.",
+      "min": 0,
+      "max": "*",
+      "base": {
+        "path": "Observation.component",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.component.extension",
+      "slicing": {
+        "discriminator": [ "url" ],
+        "ordered": false,
+        "rules": "open"
+      },
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.component.extension",
+      "name": "Observation.component.extension-8cb659e5",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/Component/summary" ]
+      } ]
+    }, {
+      "path": "Observation.component.code",
+      "short": "what",
+      "definition": "Describes what was observed. Sometimes this is called the observation \"code\"",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.component.code",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConceptRepeatedCoding" ]
+      } ]
+    }, {
+      "path": "Observation.component.value[x]",
+      "short": "The information determined as a result of making the observation, if the information has a simple value",
+      "definition": "The information determined as a result of making the observation, if the information has a simple value",
+      "min": 0,
+      "max": "1",
+      "base": {
+        "path": "Observation.component.value[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity"
+      }, {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      }, {
+        "code": "string"
+      }, {
+        "code": "Range"
+      }, {
+        "code": "Ratio"
+      }, {
+        "code": "time"
+      }, {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      }, {
+        "code": "Attachment"
+      } ]
+    }, {
+      "path": "Observation.component.dataAbsentReason",
+      "short": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "definition": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.component.dataAbsentReason",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.component.referenceRange",
+      "short": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "definition": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.component.referenceRange",
+        "min": 0,
+        "max": "*"
+      },
+      "nameReference": "ReferenceRange"
+    } ]
+  },
+  "differential": {
+    "element": [ {
+      "path": "Observation.extension",
+      "slicing": {
+        "discriminator": [ "url" ],
+        "ordered": false,
+        "rules": "open"
+      },
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-de4d8dba",
+      "short": "Contains information about the last user that marked the observation as unfinished",
+      "definition": "Contains information about the last user that marked the observation as unfinished",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/unfinished" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-97f61acc",
+      "short": "This instruction will contain a link and a title for an instruction for a dynamic observation.",
+      "definition": "This instruction will contain a link and a title for an instruction for a dynamic observation.",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/DynamicObservationInstructionLink" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-a4608460",
+      "short": "Context in which the observation exists, e.g. casework/request task",
+      "definition": "Context in which the observation exists, e.g. casework/request task",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/context" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-76fc5a9b",
+      "short": "Contains information about all user roles for which this observation is relevant.",
+      "definition": "Contains information about all user roles for which this observation is relevant.",
+      "min": 1,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/relevantForUserRole" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-b8db6402",
+      "short": "Contains information about which conditions this observation is relevant for.",
+      "definition": "Contains information about which conditions this observation is relevant for.",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/conditionReference" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-a2812cf7",
+      "short": "Linked VUM themes. Should contain only level 2 codings from FFBCondition-classification",
+      "definition": "Linked VUM themes. Should contain only level 2 codings from FFBCondition-classification",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/theme" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-17a3817b",
+      "short": "Linked VUM sub-themes. Should contain only level 3 codings from FFBCondition-classification",
+      "definition": "Linked VUM sub-themes. Should contain only level 3 codings from FFBCondition-classification",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/subTheme" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e2351834",
+      "short": "The type of observation, e.g. clinical or case observation",
+      "definition": "The type of observation, e.g. clinical or case observation",
+      "min": 1,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/informationType" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e71835d4",
+      "short": "Whether the observation default leaves a task",
+      "definition": "Whether the observation default leaves a task",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/isFollowUpTaskEnabled" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-83b779c8",
+      "short": "Whether multiple tasks may be added for this observation type",
+      "definition": "Whether multiple tasks may be added for this observation type",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/multipleFollowUpTasksAllowed" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-8257281c",
+      "short": "Whether the observation is stepwise documented",
+      "definition": "Whether the observation is stepwise documented",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/stepwiseDocumented" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-96c7c7cb",
+      "short": "Whether there is a previous step in the documentation",
+      "definition": "Whether there is a previous step in the documentation",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/hasPreviousStep" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-e91e2671",
+      "short": "Next step in the documentation",
+      "definition": "Next step in the documentation",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/nextStep" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-543f0a0e",
+      "short": "Whether observation should be visible in Cura Dialog",
+      "definition": "Whether observation should be visible in Cura Dialog",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/visibleInCuraDialog" ]
+      } ]
+    }, {
+      "path": "Observation.extension",
+      "name": "Observation.extension-992ab1a8",
+      "short": "The calculation values of the items selected in the selection lists.",
+      "definition": "The calculation values of the items selected in the selection lists.",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/CuraDynamicObservation/selectedItemCalculationValue" ]
+      } ]
+    }, {
+      "path": "Observation.meta",
+      "short": "Metadata about the resource",
+      "definition": "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.meta",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Meta",
+        "profile": [ "http://curafhir.dk/p/CuraMeta" ]
+      } ]
+    }, {
+      "path": "Observation.identifier",
+      "short": "id",
+      "definition": "A unique identifier for the simple observation instance.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.identifier",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "Identifier",
+        "profile": [ "http://curafhir.dk/p/CuraIdentifier" ]
+      } ]
+    }, {
+      "path": "Observation.status",
+      "short": "status",
+      "definition": "The status of the result value",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.status",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "code"
+      } ],
+      "binding": {
+        "strength": "required",
+        "valueSetUri": "http://hl7.org/fhir/ValueSet/observation-status"
+      }
+    }, {
+      "path": "Observation.category",
+      "short": "class",
+      "definition": "A code that classifies the general type of observation being made.  This is used  for searching, sorting and display purposes.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.category",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.code",
+      "short": "what",
+      "definition": "Describes what was observed. Sometimes this is called the observation \"name\"",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.code",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConceptRepeatedCoding" ]
+      } ]
+    }, {
+      "path": "Observation.subject",
+      "short": "who.focus",
+      "definition": "The patient, or group of patients, location, or device whose characteristics (direct or indirect) are described by the observation and into whose record the observation is placed.  Comments: Indirect characteristics may be those of a specimen, fetus, donor,  other observer (for example a relative or EMT), or any observation made about the subject.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.subject",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraCitizen" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.encounter",
+      "short": "context",
+      "definition": "The healthcare event  (e.g. a patient and healthcare provider interaction) during which this observation is made",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.encounter",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.effective[x]",
+      "short": "when.done",
+      "definition": "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.effective[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      } ]
+    }, {
+      "path": "Observation.issued",
+      "short": "when.recorded",
+      "definition": "The date and time this observation was made available to providers, typically after the results have been reviewed and verified.",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.issued",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "instant"
+      } ]
+    }, {
+      "path": "Observation.performer",
+      "short": "who.actor",
+      "definition": "Who was responsible for creating observation",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.performer",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraPractitioner" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraCitizen" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://curafhir.dk/p/CuraRelatedPerson" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.value[x]",
+      "short": "The information determined as a result of making the observation, if the information has a simple value",
+      "definition": "The information determined as a result of making the observation, if the information has a simple value",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.value[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity"
+      }, {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      }, {
+        "code": "string"
+      }, {
+        "code": "Range"
+      }, {
+        "code": "Ratio"
+      }, {
+        "code": "SampledData"
+      }, {
+        "code": "Attachment"
+      }, {
+        "code": "time"
+      }, {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      } ]
+    }, {
+      "path": "Observation.dataAbsentReason",
+      "short": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "definition": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.dataAbsentReason",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.interpretation",
+      "short": "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag.",
+      "definition": "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.interpretation",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.comments",
+      "short": "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.",
+      "definition": "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.",
+      "min": 0,
+      "max": "1",
+      "base": {
+        "path": "Observation.comments",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "string"
+      } ]
+    }, {
+      "path": "Observation.bodySite",
+      "short": "Indicates the site on the subject's body where the observation was made (i.e. the target site).",
+      "definition": "Indicates the site on the subject's body where the observation was made (i.e. the target site).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.bodySite",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.method",
+      "short": "Indicates the mechanism used to perform the observation",
+      "definition": "Indicates the mechanism used to perform the observation",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.method",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.specimen",
+      "short": "The specimen that was used when this observation was made",
+      "definition": "The specimen that was used when this observation was made",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.specimen",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Specimen" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.device",
+      "short": "The device used to generate the observation data.",
+      "definition": "The device used to generate the observation data.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.device",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Device" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/DeviceMetric" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange",
+      "name": "ReferenceRange",
+      "short": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "definition": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.extension",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.low",
+      "short": "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).",
+      "definition": "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.low",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/SimpleQuantity" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.high",
+      "short": "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).",
+      "definition": "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.high",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/SimpleQuantity" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.meaning",
+      "short": "Code for the meaning of the reference range",
+      "definition": "Code for the meaning of the reference range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.meaning",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.referenceRange.age",
+      "short": "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so",
+      "definition": "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.age",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Range"
+      } ]
+    }, {
+      "path": "Observation.referenceRange.text",
+      "short": "Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \"Negative\" or a list or table of 'normals'.",
+      "definition": "Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \"Negative\" or a list or table of 'normals'.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.referenceRange.text",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "string"
+      } ]
+    }, {
+      "path": "Observation.related",
+      "name": "Related",
+      "short": "A  reference to another resource (usually another Observation but could  also be a QuestionnaireAnswer) whose relationship is defined by the relationship type code.",
+      "definition": "A  reference to another resource (usually another Observation but could  also be a QuestionnaireAnswer) whose relationship is defined by the relationship type code.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.related.extension",
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.related.type",
+      "short": "A code specifying the kind of relationship that exists with the target resource",
+      "definition": "A code specifying the kind of relationship that exists with the target resource",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related.type",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "code"
+      } ],
+      "binding": {
+        "strength": "required",
+        "valueSetUri": "http://hl7.org/fhir/ValueSet/observation-relationshiptypes"
+      }
+    }, {
+      "path": "Observation.related.target",
+      "short": "A reference to the observation or [[[QuestionnaireResponse]]] resource that is related to this observation",
+      "definition": "A reference to the observation or [[[QuestionnaireResponse]]] resource that is related to this observation",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.related.target",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/Observation" ],
+        "aggregation": [ "referenced" ]
+      }, {
+        "code": "Reference",
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" ],
+        "aggregation": [ "referenced" ]
+      } ]
+    }, {
+      "path": "Observation.component",
+      "name": "Component",
+      "short": "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.",
+      "definition": "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.",
+      "min": 0,
+      "max": "*",
+      "base": {
+        "path": "Observation.component",
+        "min": 0,
+        "max": "*"
+      },
+      "type": [ {
+        "code": "BackboneElement"
+      } ]
+    }, {
+      "path": "Observation.component.extension",
+      "slicing": {
+        "discriminator": [ "url" ],
+        "ordered": false,
+        "rules": "open"
+      },
+      "min": 0,
+      "max": "*",
+      "type": [ {
+        "code": "Extension"
+      } ]
+    }, {
+      "path": "Observation.component.extension",
+      "name": "Observation.component.extension-8cb659e5",
+      "min": 0,
+      "max": "1",
+      "type": [ {
+        "code": "Extension",
+        "profile": [ "http://curafhir.dk/x/Component/summary" ]
+      } ]
+    }, {
+      "path": "Observation.component.code",
+      "short": "what",
+      "definition": "Describes what was observed. Sometimes this is called the observation \"code\"",
+      "min": 1,
+      "max": "1",
+      "base": {
+        "path": "Observation.component.code",
+        "min": 1,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConceptRepeatedCoding" ]
+      } ]
+    }, {
+      "path": "Observation.component.value[x]",
+      "short": "The information determined as a result of making the observation, if the information has a simple value",
+      "definition": "The information determined as a result of making the observation, if the information has a simple value",
+      "min": 0,
+      "max": "1",
+      "base": {
+        "path": "Observation.component.value[x]",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "Quantity"
+      }, {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      }, {
+        "code": "string"
+      }, {
+        "code": "Range"
+      }, {
+        "code": "Ratio"
+      }, {
+        "code": "time"
+      }, {
+        "code": "dateTime"
+      }, {
+        "code": "Period"
+      }, {
+        "code": "Attachment"
+      } ]
+    }, {
+      "path": "Observation.component.dataAbsentReason",
+      "short": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "definition": "Provides a reason why the expected value in the element Observation.value[x] is missing.",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.component.dataAbsentReason",
+        "min": 0,
+        "max": "1"
+      },
+      "type": [ {
+        "code": "CodeableConcept",
+        "profile": [ "http://curafhir.dk/p/CuraCodeableConcept" ]
+      } ]
+    }, {
+      "path": "Observation.component.referenceRange",
+      "short": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "definition": "Guidance on how to interpret the value by comparison to a normal or recommended range",
+      "min": 0,
+      "max": "0",
+      "base": {
+        "path": "Observation.component.referenceRange",
+        "min": 0,
+        "max": "*"
+      },
+      "nameReference": "ReferenceRange"
+    } ]
+  }
+}
