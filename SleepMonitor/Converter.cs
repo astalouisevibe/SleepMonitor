@@ -61,7 +61,7 @@ namespace SleepMonitor
             Console.WriteLine($"{PercentValue}%");
 
             // express in volt
-            double VoltValue = ((BitValue * 3.3) / 1023);
+            double VoltValue = ((BitValue * 3.3) / 1023); //ref spænding måske ændres
             Console.WriteLine($"{VoltValue} volt");
 
             Debug.WriteLine($"{VoltValue}%");

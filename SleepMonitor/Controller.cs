@@ -19,13 +19,13 @@ namespace SleepMonitor
     public class Controller
     {
         //pseudo værdi: 
-        public double UpperThreashold = 1.8;
-        public double LowerThreashold = 1.5;
+        public double UpperThreashold = 3.0; // tilpasses
+        public double LowerThreashold = 1.5; //fjernes?
         public Stopwatch stopwatch;
         public Converter converter = new Converter();
         
         List<Controller> Sleepdata = new List<Controller>();
-        public List<double> TempMeas { get; private set; } = new List<double>();
+        public List<double> TempMeas { get; private set; } = new List<double>(); // slettes
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
@@ -82,12 +82,12 @@ namespace SleepMonitor
         public bool Analysedata() // measurement is the value from the ADC
         {
             double average = FiveMinMeas.Average();
-            if (average < UpperThreashold || average > LowerThreashold) 
+            if (average < UpperThreashold || average > LowerThreashold) // fjerne lowerthreashold
             {
                 Console.WriteLine("Alarm");
                 CreateTask.Add(average);
                 // Kald display, update metode 
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(); // excption: borger ikke længere i seng
             }
             CreateTask.Add(average);
             return false;

@@ -30,7 +30,7 @@ namespace SleepMonitor
         public Adc()
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
-            var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
+            var hardwareSpiSettings = new SpiConnectionSettings(0, 0); // ændres måske
             // i2cdetect -y 1
 
             // ** kode modtaget af Lars Mortensen: 
