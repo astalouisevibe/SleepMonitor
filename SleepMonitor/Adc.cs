@@ -16,9 +16,7 @@ namespace SleepMonitor
 
         private Mcp3008 mcp;
         private static Timer timer;
-
-
-
+        
         // Field: Number of single ended input channel on the ADC
         protected new byte ChannelCount;
 
@@ -30,6 +28,7 @@ namespace SleepMonitor
         public Adc()
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
+            // ** var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
          //   var hardwareSpiSettings = new SpiConnectionSettings(0, 0); // ændres måske
             // i2cdetect -y 1
 
@@ -40,6 +39,8 @@ namespace SleepMonitor
             //};
 
             // The object that actively communicates with the device, take the previous object as a parameter
+            // ** SpiDevice spi = SpiDevice.Create(hardwareSpiSettings);
+            // ** mcp = new Mcp3008(spi); // instantiere
            // SpiDevice spi = SpiDevice.Create(hardwareSpiSettings);
         //    mcp = new Mcp3008(spi); // instantiere
            
