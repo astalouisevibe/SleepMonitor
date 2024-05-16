@@ -19,32 +19,23 @@ namespace SleepMonitor
     public class Controller
     {
         //pseudo værdi: 
-        public double UpperThreashold = 3.0; // tilpasses
-        public double LowerThreashold = 1.5; //fjernes?
+        public double Threashold = 3.0; // tilpasses
+
         public Stopwatch stopwatch;
         public Converter converter = new Converter();
         
-        List<Controller> Sleepdata = new List<Controller>();
-        public List<double> TempMeas { get; private set; } = new List<double>(); // slettes
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
         // private static Timer timer; Nødvendig?
-        private Adc adc;
+        private Adc adc = new Adc();
 
-        public Controller() 
-        { 
-            stopwatch = new Stopwatch();
-            adc = new Adc();
-
-        }
-       
-        public int ReadFlexSensorValue() // Method to read the value of the long flex sensor
+        public Controller()
         {
-            // Code to read the analog voltage value measured by the sensor
-            // This is just a placeholder return value, replace it with actual implementation
-            return 0;
+            stopwatch = new Stopwatch();
+
         }
+
 
         // Method to start measuring sensor input from long flex sensors
         // Measurement starts when the start button on Cura’s platform is pressed
@@ -82,7 +73,7 @@ namespace SleepMonitor
         public bool Analysedata() // measurement is the value from the ADC
         {
             double average = FiveMinMeas.Average();
-            if (average < UpperThreashold || average > LowerThreashold) // fjerne lowerthreashold
+            if (average < Threashold) // fjerne lowerthreashold
             {
                 Console.WriteLine("Alarm");
                 CreateTask.Add(average);
@@ -93,60 +84,12 @@ namespace SleepMonitor
             return false;
 
 
-            //while (true) // while the program is running
-            //{
-            //    List<double> readings = new List<double>();
-            //    for (int i = 0; i < 60; i++) // data læses hvert second i 1 min 
-            //    {
-            //        double voltage = adc.AdcSpi();
-            //        readings.Add(voltage);
-            //        Thread.Sleep(250);
-            //    }
-            //    // int OneMin = TimeSpan.Duration(1).TotalMinutes; 
-            //    // Kan denne linje bruge til at sætte siden til 1 minut???
-
-            //    double average = TempMeas.Average();
-            //    TempMeas.Clear();
-            //    FiveMinMeas.Add(average);
-
-            //    Console.WriteLine($"Average voltage for the minute: {average}");
-
-            //    if (FiveMinMeas.Count == 5)
-            //    {
-            //        double fiveMinAverage = FiveMinMeas.Average();
-            //        FiveMinMeas.Clear();
-            //        CreateTask.Add(fiveMinAverage);
-            //        // Samme problem som ovenfor
-
-            //        Console.WriteLine($"Average voltage for five minutes: {fiveMinAverage}");
-            //    }
-            }
+        }
 
         private Exception ArgumentOutOfRangeException()
         {
             throw new ArgumentOutOfRangeException("Plejehjemsbeboeren er ikke længere i sengen");
         }
-    
-
-
-        // Method to stop measuring sensor input from long flex sensors
-        // Measurement stops when the stop button on Cura’s platform is pressed
-        //public float StopReading()
-        //{
-        //    // Stop the stopwatch to measure the time
-        //    stopwatch.Stop();
-
-        //    // Placeholder code to simulate sensor measurement
-        //    // This is just a placeholder return value, replace it with actual implementation
-        //    return 0.0f;
-        //}
-
-        //public void ResetData()
-        //{
-        //    stopwatch.Reset();
-        //    Sleepdata.Clear();
-        //}
-
 
     }
 }

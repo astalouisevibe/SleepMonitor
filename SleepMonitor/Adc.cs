@@ -49,20 +49,14 @@ namespace SleepMonitor
         //Methods
 
         // Read value from ADC
-        public virtual int AdcSpi()
-        { 
-            return mcp.Read(channel);
-        }
-
+      
         public double ReadDigitalValue() // --> trådfunktion / thread
         {
-            ////  return ReadAdc(ChannelCount);
-            //    Console.Clear();
-            //    // values is between 0 and 1023
-            //    double value = mcp.Read(0);
-            //    Console.WriteLine($"{value}");
-            //    Thread.Sleep(250);
-            return 0;
+             double value=  mcp.Read(ChannelCount);
+             // values is between 0 and 1023
+              Console.WriteLine($"{value}");
+              Thread.Sleep(250);
+              return value;
         }
     }
 }
