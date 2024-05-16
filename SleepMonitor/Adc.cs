@@ -25,7 +25,17 @@ namespace SleepMonitor
         public int channel { get; private set; }
 
         // Contrcutor, (extern?)
-        public Adc()
+       
+            private SpiDevice mcp3008;
+
+            public Adc()
+            {
+                var connectionSettings = new SpiConnectionSettings(0, 0); // BusId 0, ChipSelectLine 0
+                var spiController = SpiDevice.Create(connectionSettings);
+                mcp3008 = spiController;
+            }
+           
+        /*public Adc()
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
             var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
@@ -42,7 +52,7 @@ namespace SleepMonitor
              mcp = new Mcp3008(spi); // instantiere
            
            
-        }
+        } */
 
 
         //Methods
