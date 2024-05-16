@@ -12,4 +12,10 @@
     <PackageReference Include="Iot.Device.Bindings" Version="3.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="monimoni.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
