@@ -8,6 +8,7 @@ namespace SleepMonitor
         static void Main(string[] args)
         {
 
+
             string files = Directory.GetCurrentDirectory();
             string[] files1 = Directory.GetFiles(files);
             string SmData = "monimoni.txt"; // kan evt. ændres til relativ
@@ -33,12 +34,19 @@ namespace SleepMonitor
             // Opret instanser af nødvendige objekter
             RaspberryPiDll _rpi = new RaspberryPiDll();
             RaspberryPiNetDll.Keys B1 = new Keys(_rpi, Keys.KEYS.SW1);
-
+          
             // Opret en instans af Converter klassen
             Converter converter = new Converter();
 
             // Opret en instans af Adc klassen
             Adc adc = new Adc();
+
+            /*  if (!_rpi.Open())
+             {
+                 Console.WriteLine("Error with open communication to Raspberry Pi");
+                 return;
+             }
+           */
 
             // Læs bitværdi fra ADC'en
             double bitValue = adc.ReadDigitalValue();
@@ -49,34 +57,21 @@ namespace SleepMonitor
             // Opret en instans af Controller klassen og lever voltværdien som parameter
             Controller controller = new Controller(Convert.ToInt32(voltValue));
 
+            // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
+            controller.StartReading();
 
 
 
-            /*  if (!_rpi.Open())
-              {
-                  Console.WriteLine("Error with open communication to Raspberry Pi");
-                  return;
-              }
-            */
-
-            while (true)
+           /* if (B1.KeyPressed == 1)
             {
-
-
-                // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
                 controller.StartReading();
-
-
-                // Tjek om knappen er blevet trykket
-                /*if (B1.KeyPressed == 1)
-                {
-                    controller.StartReading();
-
-                }
-                */
+            }
+           */
+          
+            // måske dvale
 
             }
         }
     }
 
-    }
+   

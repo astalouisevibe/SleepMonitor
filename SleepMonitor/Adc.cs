@@ -53,12 +53,12 @@ namespace SleepMonitor
       
         public double ReadDigitalValue() // --> trådfunktion / thread
         {
-            // double value=  mcp.Read(ChannelCount);
-            double value = 2; // pseudo værdi
-             // values is between 0 and 1023
-              Console.WriteLine($"{value}");
+            //double value=  mcp.Read(ChannelCount);
+           double value = 20; // pseudo værdi
+            // values is between 0 and 1023
+            Console.WriteLine($"{value}");
               Thread.Sleep(250);
-              return value;
+            return value;
         }
     }
 }

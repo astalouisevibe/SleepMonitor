@@ -21,9 +21,11 @@ namespace SleepMonitor
     {
         //pseudo værdi: 
         public double Threashold = 3.0; // tilpasses
-
+        RaspberryPiDll _rpi;
+        RaspberryPiNetDll.Keys B2;
         public Stopwatch stopwatch;
         public Converter converter;
+        
         public List<double> FiveMinMeas { get; private set; } = new List<double>();
         public List<double> CreateTask { get; private set; } = new List<double>();
 
@@ -34,6 +36,8 @@ namespace SleepMonitor
         {
             stopwatch = new Stopwatch();
             converter = new Converter();
+            _rpi = new RaspberryPiDll();
+            B2 = new Keys(_rpi, Keys.KEYS.SW2);
         }
 
 
@@ -67,6 +71,12 @@ namespace SleepMonitor
                 // start over
             // logging?
             // check for updates // events
+
+                if (stopwatch.Elapsed.TotalHours >= 8 /*|| B2.KeyPressed == 1 */ || value <= 1) // 1 er reference spænding = der er ingen i sengen
+                {
+                    stopwatch.Stop();
+                    break;
+                }
             }
         }
 
