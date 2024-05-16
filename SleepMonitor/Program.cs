@@ -16,7 +16,7 @@ namespace SleepMonitor
             string[] lines = File.ReadAllLines(SmData);
 
            
-               foreach (string file in lines)
+            /*   foreach (string file in lines)
                {
                    Console.WriteLine(file);
                }
@@ -29,7 +29,7 @@ namespace SleepMonitor
                    }
                }
 
-          
+          */
 
             // Opret instanser af nødvendige objekter
             RaspberryPiDll _rpi = new RaspberryPiDll();
@@ -41,12 +41,12 @@ namespace SleepMonitor
             // Opret en instans af Adc klassen
             Adc adc = new Adc();
 
-            /*  if (!_rpi.Open())
+             if (!_rpi.Open())
              {
                  Console.WriteLine("Error with open communication to Raspberry Pi");
                  return;
              }
-           */
+           
 
             // Læs bitværdi fra ADC'en
             double bitValue = adc.ReadDigitalValue();

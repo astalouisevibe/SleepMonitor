@@ -72,11 +72,12 @@ namespace SleepMonitor
             // logging?
             // check for updates // events
 
-                if (stopwatch.Elapsed.TotalHours >= 8 /*|| B2.KeyPressed == 1 */ || value <= 1) // 1 er reference spænding = der er ingen i sengen
-                {
-                    stopwatch.Stop();
-                    break;
-                }
+              //  if (stopwatch.Elapsed.TotalHours >= 8 /*|| B2.KeyPressed == 1 */ || value <= 1) // 1 er reference spænding = der er ingen i sengen
+                //{
+                  //  stopwatch.Stop();
+                    //break;
+                //}
+              
             }
         }
 
