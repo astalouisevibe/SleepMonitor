@@ -14,13 +14,6 @@ namespace SleepMonitor
 {
     public class Converter
     {
-    
-       /* public double bitValue;
-        public Converter(int bitValue)
-        {
-            this.bitValue = bitValue;
-        }
-       */
         // Method to convert the specified analog voltage to a digital value
         public double ConvertBitToVolt(double BitValue)
         {
@@ -37,4 +30,16 @@ namespace SleepMonitor
             return VoltValue;
         }
     }
+
+
+    //______________________________________________________________________________________
+
+    // KAN IKKE HUSKE OM DETTE BRUGES I SIMULERING - AFVENT SLETNING
+
+    /* public double bitValue;
+     public Converter(int bitValue)
+     {
+         this.bitValue = bitValue;
+     }
+    */
 }

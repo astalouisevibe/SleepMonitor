@@ -19,7 +19,6 @@ namespace SleepMonitor
 {
     public class Controller
     {
-        //pseudo værdi: 
         public double Threashold = 3.0; // tilpasses
         RaspberryPiDll _rpi;
         RaspberryPiNetDll.Keys B2;
@@ -30,7 +29,7 @@ namespace SleepMonitor
         public List<double> CreateTask { get; private set; } = new List<double>();
 
         // private static Timer timer; Nødvendig?
-        private Adc adc = new Adc();
+        private Adc adc;
 
         public Controller(int bitValue)
         {
@@ -38,6 +37,7 @@ namespace SleepMonitor
             converter = new Converter();
             _rpi = new RaspberryPiDll();
             B2 = new Keys(_rpi, Keys.KEYS.SW2);
+            adc = new Adc();
         }
 
 
@@ -84,7 +84,7 @@ namespace SleepMonitor
         public bool Analysedata() // measurement is the value from the ADC
         {
             double average = FiveMinMeas.Average();
-            if (average < Threashold) // fjerne lowerthreashold
+            if (average < Threashold)
             {
                 Console.WriteLine("Alarm");
                 CreateTask.Add(average);
