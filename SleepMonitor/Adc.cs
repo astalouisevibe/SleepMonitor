@@ -29,6 +29,7 @@ namespace SleepMonitor
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
             // ** var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
+         //   var hardwareSpiSettings = new SpiConnectionSettings(0, 0); // ændres måske
             // i2cdetect -y 1
 
             // ** kode modtaget af Lars Mortensen: 
@@ -40,6 +41,8 @@ namespace SleepMonitor
             // The object that actively communicates with the device, take the previous object as a parameter
             // ** SpiDevice spi = SpiDevice.Create(hardwareSpiSettings);
             // ** mcp = new Mcp3008(spi); // instantiere
+           // SpiDevice spi = SpiDevice.Create(hardwareSpiSettings);
+        //    mcp = new Mcp3008(spi); // instantiere
            
         }
 
@@ -47,20 +50,15 @@ namespace SleepMonitor
         //Methods
 
         // Read value from ADC
-        public virtual int AdcSpi()
-        { 
-            return mcp.Read(channel);
-        }
-
+      
         public double ReadDigitalValue() // --> trådfunktion / thread
         {
-            ////  return ReadAdc(ChannelCount);
-            //    Console.Clear();
-            //    // values is between 0 and 1023
-            //    double value = mcp.Read(0);
-            //    Console.WriteLine($"{value}");
-            //    Thread.Sleep(250);
-            return 0;
+            // double value=  mcp.Read(ChannelCount);
+            double value = 2; // pseudo værdi
+             // values is between 0 and 1023
+              Console.WriteLine($"{value}");
+              Thread.Sleep(250);
+              return value;
         }
     }
 }
