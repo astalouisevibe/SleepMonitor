@@ -11,18 +11,20 @@ namespace SleepMonitor
             RaspberryPiNetDll.Keys B1 = new Keys(_rpi, Keys.KEYS.SW1);
             Controller controller = new Controller();
 
-            if (!_rpi.Open())
+
+
+          /*  if (!_rpi.Open())
             {
                 Console.WriteLine("Error with open communication to Raspberry Pi");
                 return;
             }
-
+          */
 
             while (true)
             {
 
-     
-                    controller.StartReading();
+
+                   controller.StartReading();
 
 
                     // Tjek om knappen er blevet trykket

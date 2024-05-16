@@ -13,6 +13,7 @@ using System.Threading;
 using Iot.Device.Adc; // ADC nuget-pakke
 using UnitsNet;
 using System.Runtime.Intrinsics.X86;
+using System.Device.Gpio;
 
 namespace SleepMonitor
 {
@@ -29,10 +30,10 @@ namespace SleepMonitor
         // private static Timer timer; Nødvendig?
         private Adc adc = new Adc();
 
-        public Controller()
+        public Controller(int bitValue)
         {
             stopwatch = new Stopwatch();
-
+            converter = new Converter(bitValue);
         }
 
 
