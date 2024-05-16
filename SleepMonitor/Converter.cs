@@ -12,13 +12,15 @@ using Iot.Device.Adc;
 
 namespace SleepMonitor
 {
-    public  class Converter
+    public class Converter
     {
-        private double _bitValue;
+    
+       /* public double bitValue;
         public Converter(int bitValue)
         {
-            _bitValue = bitValue;
+            this.bitValue = bitValue;
         }
+       */
         // Method to convert the specified analog voltage to a digital value
         public double ConvertBitToVolt(double BitValue)
         {

@@ -33,7 +33,7 @@ namespace SleepMonitor
         public Controller(int bitValue)
         {
             stopwatch = new Stopwatch();
-            converter = new Converter(bitValue);
+            converter = new Converter();
         }
 
 
