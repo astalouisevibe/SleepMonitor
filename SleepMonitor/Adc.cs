@@ -16,7 +16,7 @@ namespace SleepMonitor
 
         private Mcp3008 mcp;
         private static Timer timer;
-        
+
         // Field: Number of single ended input channel on the ADC
         protected new byte ChannelCount;
 
@@ -24,17 +24,15 @@ namespace SleepMonitor
         public double ReferenceVoltage { get; set; }
         public int channel { get; private set; }
 
-        // Contrcutor, (extern?)
-       
-            private SpiDevice mcp3008;
+        private SpiDevice mcp3008;
 
-            public Adc()
-            {
-                var connectionSettings = new SpiConnectionSettings(0, 0); // BusId 0, ChipSelectLine 0
-                var spiController = SpiDevice.Create(connectionSettings);
-                mcp3008 = spiController;
-            }
-           
+        public Adc()
+        {
+            var connectionSettings = new SpiConnectionSettings(0, 0); // BusId 0, ChipSelectLine 0
+            var spiController = SpiDevice.Create(connectionSettings);
+            mcp3008 = spiController;
+        }
+
         /*public Adc()
         {
             // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
@@ -58,14 +56,14 @@ namespace SleepMonitor
         //Methods
 
         // Read value from ADC
-      
+
         public double ReadDigitalValue() // --> trådfunktion / thread
         {
-            double value=  mcp.Read(ChannelCount);
-           //double value = 20; // pseudo værdi
+            double value = mcp.Read(ChannelCount);
+            //double value = 20; // pseudo værdi
             // values is between 0 and 1023
             Console.WriteLine($"{value}");
-              Thread.Sleep(250);
+            Thread.Sleep(250);
             return value;
         }
     }
