@@ -3,6 +3,7 @@ using System;
 using RaspberryPiNetDll;
 using System.Diagnostics.Metrics;
 using Microsoft.VisualBasic;
+using FileShare;
 
 namespace SleepMonitor
 {
@@ -54,15 +55,15 @@ namespace SleepMonitor
         // _______________________________________________________________
 
         // SIMULERET KODE TIL AT TESTE
-
+        // BN: pi, PW: raspberry, 
 
         static void Main(string[] args)
         {
             // Simulerede testmålinger
             List<double> testValues = new List<double> { 1,2,3,4,5,6,7,8,9,10 }; // Eksempelværdier
+            // Simulerede testmålinger, gennemsnitsværdier
+            List<double> testValues = new List<double> { 20, 25, 30, 35, 40,45,55 }; // Eksempelværdier
 
-            // Bestem filstien
-            string SmData = "Sleepdata.json";
             string fullPath = "..\\..\\..\\Sleepdata.json";
 
             try

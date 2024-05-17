@@ -45,11 +45,41 @@ namespace SleepMonitor
         // Measurement starts when the start button on Cura’s platform is pressed
        public void StartReading()
         {
+            // Testing code - Metode med fil:
+            //Metoderne GetCurrentDirectory og Getfiles kaldes
+            string files = Directory.GetCurrentDirectory();
+            Console.WriteLine(files);
+
+            string[] files1 = Directory.GetFiles(files);
+            Console.WriteLine(files1);
+
+            // Bestem filstien
+            string SmData = "Sleepdata.json";
+
+            string[] lines = File.ReadAllLines(SmData);
+            foreach (string file in lines)
+            {
+                Console.WriteLine(file);
+            }
+
+            FileStream fileSreamIn = new FileStream(SmData, FileMode.Open);
+
+            //using (StreamReader sr = new StreamReader(fileSreamIn))
+            //{
+            //    while (sr.EndOfStream != true) // slutter med at læse indtil der ikke er mere data i sættet
+            //    {
+            //        string? line = sr.ReadLine();
+            //        Console.WriteLine(line);
+            //    }
+
+            //    sr.Close();
+            //}
+
             // Code to start the measurement
             stopwatch.Start();
             while (true)
             {
-                double value = adc.ReadDigitalValue();
+                // ** double value = adc.ReadDigitalValue();
                 double voltValue = converter.ConvertBitToVolt(value);
                 
                 FiveMinMeas.Add(voltValue);
