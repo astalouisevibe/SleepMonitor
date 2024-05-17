@@ -10,7 +10,7 @@ using Iot.Device.Adc;
 namespace SleepMonitor
 {
     // DEN RIGTIGE KLASSE TIL ADC
-    /*
+    
     public class Adc
     {
         private Mcp3008 mcp;
@@ -21,19 +21,20 @@ namespace SleepMonitor
 
         private SpiDevice mcp3008;
 
-        public Adc()
-        {
-            var connectionSettings = new SpiConnectionSettings(0, 0); // BusId 0, ChipSelectLine 0
-            var spiController = SpiDevice.Create(connectionSettings);
-            mcp3008 = spiController;
-        }
+        //public Adc()
+        //{
+        //    var connectionSettings = new SpiConnectionSettings(0, 0); // BusId 0, ChipSelectLine 0
+        //    var spiController = SpiDevice.Create(connectionSettings);
+        //    mcp3008 = spiController;
+        //}
 
         /*public Adc()
         {
-            // Creating a new HW Spi object with two parameters, the busId and chipSelectLine
+             Creating a new HW Spi object with two parameters, the busId and chipSelectLine
             var hardwareSpiSettings = new SpiConnectionSettings(0, 0);
-            // i2cdetect -y 1
+             i2cdetect -y 1
         private SpiDevice spiDevice;
+        */
 
         public Adc()
         {
@@ -42,56 +43,56 @@ namespace SleepMonitor
             mcp = new Mcp3008(spi); // instantiere
         }
 
-        // Read value from ADC
+         //Read value from ADC
         public double ReadDigitalValue() // --> trådfunktion / thread
          {
              double value=  mcp.Read(ChannelCount);
-             // values is between 0 and 1023
+              //values is between 0 and 1023
              Console.WriteLine($"{value}");
                Thread.Sleep(250);
              return value;
          }
      } 
-    */
+    
 
 
 
 
-       // _______________________________________________________________
+    // _______________________________________________________________
 
 
-        // SIMULERET METODE TIL AT LÆSE FAST DIGITAL VÆRDI
-        
-        public class Adc
-            {
-                private double fixedValue;
+    // SIMULERET METODE TIL AT LÆSE FAST DIGITAL VÆRDI
 
-        // Read value from ADC
+    //        public class Adc
+    //            {
+    //                private double fixedValue;
 
-        public double ReadDigitalValue() // --> trådfunktion / thread
-        {
-            double value = mcp.Read(ChannelCount);
-            //double value = 20; // pseudo værdi
-            // values is between 0 and 1023
-            Console.WriteLine($"{value}");
-            Thread.Sleep(250);
-            return value;
-        }
-    }
+    //        // Read value from ADC
+
+    //        public double ReadDigitalValue() // --> trådfunktion / thread
+    //        {
+    //            double value = mcp.Read(ChannelCount);
+    //            //double value = 20; // pseudo værdi
+    //            // values is between 0 and 1023
+    //            Console.WriteLine($"{value}");
+    //            Thread.Sleep(250);
+    //            return value;
+    //        }
+    //    }
+    //}
+    //                public Adc(double fixedValue)
+    //                {
+    //                    this.fixedValue = fixedValue;
+    //                }
+
+    //                // Simuleret metode til at læse en fast digital værdi
+    //                public double ReadDigitalValue()
+    //                {
+    //                    return fixedValue;
+    //                }
+    //            }
+
 }
-                public Adc(double fixedValue)
-                {
-                    this.fixedValue = fixedValue;
-                }
-
-                // Simuleret metode til at læse en fast digital værdi
-                public double ReadDigitalValue()
-                {
-                    return fixedValue;
-                }
-            }
-        
-    }
 
 
 
@@ -100,7 +101,7 @@ namespace SleepMonitor
 
 
 
- 
+
 
 /*
 

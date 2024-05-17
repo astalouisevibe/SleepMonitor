@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="AU.RaspberryPi.RaspberryPiDll" Version="1.0.0" />
+    <PackageReference Include="AU.ST2PRJ2.Fileshare" Version="1.0.4" />
     <PackageReference Include="Iot.Device.Bindings" Version="3.1.0" />
   </ItemGroup>
 
