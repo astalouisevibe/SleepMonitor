@@ -19,7 +19,7 @@ namespace SleepMonitor
 {
     public class Controller
     {
-        public double Threashold = 3.0; // tilpasses
+        public double Threashold = 3.0; // tilpasse
         RaspberryPiDll _rpi;
         RaspberryPiNetDll.Keys B2;
         public Stopwatch stopwatch;
