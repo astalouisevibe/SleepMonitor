@@ -59,7 +59,7 @@ namespace SleepMonitor
         static void Main(string[] args)
         {
             // Simulerede testmålinger
-            List<double> testValues = new List<double> { 20, 25, 30, 35, 40,45,55 }; // Eksempelværdier
+            List<double> testValues = new List<double> { 1,2,3,4,5,6,7,8,9,10 }; // Eksempelværdier
 
             // Bestem filstien
             string SmData = "Sleepdata.json";
@@ -77,6 +77,7 @@ namespace SleepMonitor
                 {
                     timeStamps.Add(currentTime);
                     measurements.Add(testValue);
+                    Console.WriteLine($"{currentTime}" + " --- " +$"{testValue}");
                 }
 
                 // Skriv værdierne til filen
@@ -87,6 +88,7 @@ namespace SleepMonitor
                         writer.WriteLine($"{timeStamps[i]:g},{measurements[i]}");
                     }
                 }
+
 
                 Console.WriteLine($"Data has been written to {fullPath}");
             }
