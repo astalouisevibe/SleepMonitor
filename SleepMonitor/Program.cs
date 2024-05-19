@@ -4,6 +4,8 @@ using RaspberryPiNetDll;
 using System.Diagnostics.Metrics;
 using Microsoft.VisualBasic;
 using FileShare;
+    using Newtonsoft.Json;
+using System.Globalization;
 
 namespace SleepMonitor
 {
@@ -59,19 +61,148 @@ namespace SleepMonitor
 
         static void Main(string[] args)
         {
+            string csvFilePath = "..\\..\\..\\monimoni.csv";
+            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+
+            // Læs den målte værdi fra monimoni.csv
+            double measuredValue = ReadMeasuredValueFromCsv(csvFilePath);
+
+            // Initialiser Controller med den målte værdi
+            Controller controller = new Controller(measuredValue);
+            API api = new API(controller);
+
+            // Start målingen
+            controller.StartReading();
+
+            // Kald API metoden til at behandle data og gemme som JSON
+            api.DataToJsonFile(csvFilePath, jsonFilePath);
+        }
+
+        static double ReadMeasuredValueFromCsv(string filePath)
+        {
+            double measuredValue = 0.0;
+
+            using (var reader = new StreamReader(filePath))
+            {
+                // Spring header-linjen over, hvis der er en
+                string headerLine = reader.ReadLine();
+
+                // Læs den første linje i .csv filen
+                string firstLine = reader.ReadLine();
+                if (double.TryParse(firstLine, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+                {
+                    measuredValue = value;
+                }
+            }
+
+            return measuredValue;
+        }
+    }
+}
+
+/*
+        static void Main(string[] args)
+        {
+
+            string csvFilePath = "..\\..\\..\\monimoni.csv";
+            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+
+            // Initialiser API med en passende controller, hvis nødvendigt
+            Controller controller = new Controller();
+            API api = new API(controller);
+
+            // Kald API metoden til at behandle data og gemme som JSON
+            api.DataToJsonFile(csvFilePath, jsonFilePath);
+
+
+
             // Simulerede testmålinger
-            List<double> testValues = new List<double> { 1,2,3,4,5,6,7,8,9,10 }; // Eksempelværdier
-            // Simulerede testmålinger, gennemsnitsværdier
-            List<double> testValues = new List<double> { 20, 25, 30, 35, 40,45,55 }; // Eksempelværdier
 
-            string fullPath = "..\\..\\..\\Sleepdata.json";
+            try
+            {
+                // Læs værdierne fra .csv filen
+                List<double> testValues = ReadValuesFromCsv(csvFilePath);
 
+                // Beregn gennemsnittet af de første 1200 værdier
+                double averageValue = CalculateAverage(testValues, 1200);
+
+                // Opret en dictionary til at gemme gennemsnitsværdien med en timestamp
+                var sleepData = new
+                {
+                    TimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:"),
+                    AverageValue = averageValue
+                };
+
+                // Skriv data til .json filen
+                WriteDataToJson(sleepData, jsonFilePath);
+
+                Console.WriteLine($"Data has been written to {jsonFilePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        static List<double> ReadValuesFromCsv(string filePath)
+        {
+            var values = new List<double>();
+
+            using (var reader = new StreamReader(filePath))
+            {
+                // Spring header-linjen over, hvis der er en
+                string headerLine = reader.ReadLine();
+
+                // Læs hver linje i .csv filen
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+                    {
+                        values.Add(value);
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        static double CalculateAverage(List<double> values, int count)
+        {
+            // Hvis der er færre værdier end count, så beregn gennemsnittet af alle tilgængelige værdier
+            int actualCount = Math.Min(values.Count, count);
+
+            if (actualCount == 0)
+                return 0;
+
+            double sum = values.Take(actualCount).Sum();
+            return sum / actualCount;
+        }
+
+        static void WriteDataToJson(object data, string filePath)
+        {
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            using (var writer = new StreamWriter(filePath, append: false))
+            {
+                writer.Write(json);
+            }
+        }
+    }
+}
+
+
+*/
+
+/*
             try
             {
                 // Opret lister til tidspunkter og målinger
                 List<DateTime> timeStamps = new List<DateTime>();
                 List<double> measurements = new List<double>();
 
+
+                
                 // Tilføj passende DateTime-værdier for hver testværdi
                 DateTime currentTime = DateTime.Now;
                 foreach (var testValue in testValues)
@@ -82,7 +213,7 @@ namespace SleepMonitor
                 }
 
                 // Skriv værdierne til filen
-                using (StreamWriter writer = new StreamWriter(fullPath, append: false))
+                using (StreamWriter writer = new StreamWriter(jsonFilePath, append: false))
                 {
                     for (int i = 0; i < testValues.Count; i++)
                     {
@@ -91,14 +222,13 @@ namespace SleepMonitor
                 }
 
 
-                Console.WriteLine($"Data has been written to {fullPath}");
+                Console.WriteLine($"Data has been written to {jsonFilePath}");
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-        }
-    }
-}
+            } */
+
+
 

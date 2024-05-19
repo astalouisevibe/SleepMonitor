@@ -18,119 +18,68 @@ using System.Device.Gpio;
 namespace SleepMonitor
 {
     public class Controller
-    {
-        public double Threashold = 3.0; // tilpasse
-        RaspberryPiDll _rpi;
-        RaspberryPiNetDll.Keys B2;
-        public Stopwatch stopwatch;
-        public Converter converter;
-        
-        public List<double> FiveMinMeas { get; private set; } = new List<double>();
-        public List<double> CreateTask { get; private set; } = new List<double>();
-
-        // private static Timer timer; Nødvendig?
-        private Adc adc;
-
-        public Controller(int bitValue)
         {
-            stopwatch = new Stopwatch();
-            converter = new Converter();
-            _rpi = new RaspberryPiDll();
-            B2 = new Keys(_rpi, Keys.KEYS.SW2);
-            adc = new Adc(bitValue); // ændres ved simulering *parameter=bitValue*, normal kørsel ingen parameter
-        }
+            public double Threshold = 0.5; // tilpasset
+            private RaspberryPiDll _rpi;
+            private RaspberryPiNetDll.Keys B2;
+            public Stopwatch stopwatch;
+            public Converter converter;
 
+            public List<double> FiveMinMeas { get; private set; } = new List<double>();
+            public List<double> CreateTask { get; private set; } = new List<double>();
 
-        // Method to start measuring sensor input from long flex sensors
-        // Measurement starts when the start button on Cura’s platform is pressed
-       public void StartReading()
-        {
-            // Testing code - Metode med fil:
-            //Metoderne GetCurrentDirectory og Getfiles kaldes
-            string files = Directory.GetCurrentDirectory();
-            Console.WriteLine(files);
+            private Adc adc;
+        private double measuredValue;
 
-            string[] files1 = Directory.GetFiles(files);
-            Console.WriteLine(files1);
-
-            // Bestem filstien
-            string SmData = "Sleepdata.json";
-
-            string[] lines = File.ReadAllLines(SmData);
-            foreach (string file in lines)
+        public Controller(Adc adc)
             {
-                Console.WriteLine(file);
+                stopwatch = new Stopwatch();
+                converter = new Converter();
+                _rpi = new RaspberryPiDll();
+                B2 = new RaspberryPiNetDll.Keys(_rpi, RaspberryPiNetDll.Keys.KEYS.SW2);
+                this.adc=adc; 
             }
 
-            FileStream fileSreamIn = new FileStream(SmData, FileMode.Open);
+        public Controller(double measuredValue)
+        {
+            this.measuredValue = measuredValue;
+        }
 
-            //using (StreamReader sr = new StreamReader(fileSreamIn))
-            //{
-            //    while (sr.EndOfStream != true) // slutter med at læse indtil der ikke er mere data i sættet
-            //    {
-            //        string? line = sr.ReadLine();
-            //        Console.WriteLine(line);
-            //    }
-
-            //    sr.Close();
-            //}
-
-            // Code to start the measurement
-            stopwatch.Start();
-            while (true)
+        public void StartReading()
             {
-                // ** double value = adc.ReadDigitalValue();
-                double voltValue = converter.ConvertBitToVolt(value);
-                
-                FiveMinMeas.Add(voltValue);
-
-                //if 5 min passed run update 
-                if (stopwatch.Elapsed.TotalMinutes>=5) 
+                stopwatch.Start();
+                while (stopwatch.Elapsed.TotalMinutes<=2)  // ændress til 5 minutter
                 {
-                    var outofbed = Analysedata(); // split list into 5 get average and then return true if it worked
-                    if (outofbed)
+                    double value = adc.ReadDigitalValue();
+                    double voltValue = converter.ConvertBitToVolt(value);
+
+                    FiveMinMeas.Add(voltValue);
+
+                    if (stopwatch.Elapsed.TotalMinutes >= 1)
                     {
-                        break;
+                        var outofbed = AnalyzeData();
+                        if (outofbed)
+                        {
+                            break;
+                        }
+                        stopwatch.Restart();
+                        FiveMinMeas.Clear();
                     }
-                    // update disp console, opret display klasse (update)
-                    stopwatch.Restart();
-                    FiveMinMeas.Clear();
                 }
-                
-                // if success clear list and sw
-                // start over
-            // logging?
-            // check for updates // events
-
-              //  if (stopwatch.Elapsed.TotalHours >= 8 /*|| B2.KeyPressed == 1 */ || value <= 1) // 1 er reference spænding = der er ingen i sengen
-                //{
-                  //  stopwatch.Stop();
-                    //break;
-                //}
-              
             }
-        }
 
-        public bool Analysedata() // measurement is the value from the ADC
-        {
-            double average = FiveMinMeas.Average();
-            if (average < Threashold)
+            public bool AnalyzeData()
             {
-                Console.WriteLine("Alarm");
-                CreateTask.Add(average);
-                // Kald display, update metode 
-                throw new ArgumentOutOfRangeException(); // excption: borger ikke længere i seng
+                double average = FiveMinMeas.Average();
+                if (average < Threshold)
+                {
+                    Console.WriteLine("Alarm");
+                    CreateTask.Add(average);
+                Console.WriteLine("borger ikke i seng");
             }
-            CreateTask.Add(average);
-            return false;
-
-
+                CreateTask.Add(average);
+                return false;
+            }
         }
-
-        private Exception ArgumentOutOfRangeException()
-        {
-            throw new ArgumentOutOfRangeException("Plejehjemsbeboeren er ikke længere i sengen");
-        }
-
     }
-}
+
