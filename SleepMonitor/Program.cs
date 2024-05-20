@@ -68,7 +68,7 @@ namespace SleepMonitor
             double measuredValue = ReadMeasuredValueFromCsv(csvFilePath);
 
             // Initialiser ADC (du skal selv implementere oprettelsen af ADC objektet korrekt)
-            Adc adc = new Adc(); // Initialiser med korrekt constructor for din hardware
+            Adc adc = new Adc(0,0,0); // Initialiser med korrekt constructor for din hardware
             Controller controller = new Controller(adc);
 
             // Start målingen
