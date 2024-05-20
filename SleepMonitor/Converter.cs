@@ -15,14 +15,14 @@ namespace SleepMonitor
     public class Converter
     {
         // Method to convert the specified analog voltage to a digital value
-        public double ConvertBitToVolt(double BitValue)
+        public double ConvertBitToVolt(double value)
         {
             // express in percentage, rounds up to the nearest 10'th
-            double PercentValue = Math.Round(BitValue / 10.23);
+            double PercentValue = Math.Round(value / 10.23);
             Console.WriteLine($"{PercentValue}%");
 
             // express in volt
-            double VoltValue = ((BitValue * 3.3) / 1023); //ref spænding måske ændres
+            double VoltValue = ((value * 3.3) / 1023); //ref spænding måske ændres
             Console.WriteLine($"{VoltValue} volt");
 
             Debug.WriteLine($"{VoltValue}%");

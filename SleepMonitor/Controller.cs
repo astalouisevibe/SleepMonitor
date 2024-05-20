@@ -14,123 +14,92 @@ using Iot.Device.Adc; // ADC nuget-pakke
 using UnitsNet;
 using System.Runtime.Intrinsics.X86;
 using System.Device.Gpio;
+using Newtonsoft.Json;
 
 namespace SleepMonitor
 {
     public class Controller
     {
-        public double Threashold = 3.0; // tilpasses
-        RaspberryPiDll _rpi;
-        RaspberryPiNetDll.Keys B2;
-        public Stopwatch stopwatch;
-        public Converter converter;
-        
-        public List<double> FiveMinMeas { get; private set; } = new List<double>();
-        public List<double> CreateTask { get; private set; } = new List<double>();
+        public double Threshold = 0.5; // tilpasset
+        private RaspberryPiDll _rpi;
+        private RaspberryPiNetDll.Keys B2;
+        public Stopwatch stopwatch = new Stopwatch();
+        public Converter converter = new Converter();
 
-        // private static Timer timer; Nødvendig?
+        public List<Measurement> Measurements { get; private set; } = new List<Measurement>();
+        public List<AverageMeasurement> AverageMeasurements { get; private set; } = new List<AverageMeasurement>();
+
         private Adc adc;
 
-        public Controller(int bitValue)
+        public Controller(Adc adc)
         {
-            stopwatch = new Stopwatch();
             converter = new Converter();
             _rpi = new RaspberryPiDll();
-            B2 = new Keys(_rpi, Keys.KEYS.SW2);
-            adc = new Adc(bitValue); // ændres ved simulering *parameter=bitValue*, normal kørsel ingen parameter
+            B2 = new RaspberryPiNetDll.Keys(_rpi, RaspberryPiNetDll.Keys.KEYS.SW2);
+            this.adc = adc;
         }
 
-
-        // Method to start measuring sensor input from long flex sensors
-        // Measurement starts when the start button on Cura’s platform is pressed
-       public void StartReading()
+        public void StartReading()
         {
-            // Testing code - Metode med fil:
-            //Metoderne GetCurrentDirectory og Getfiles kaldes
-            string files = Directory.GetCurrentDirectory();
-            Console.WriteLine(files);
-
-            string[] files1 = Directory.GetFiles(files);
-            Console.WriteLine(files1);
-
-            // Bestem filstien
-            string SmData = "Sleepdata.json";
-
-            string[] lines = File.ReadAllLines(SmData);
-            foreach (string file in lines)
-            {
-                Console.WriteLine(file);
-            }
-
-            FileStream fileSreamIn = new FileStream(SmData, FileMode.Open);
-
-            //using (StreamReader sr = new StreamReader(fileSreamIn))
-            //{
-            //    while (sr.EndOfStream != true) // slutter med at læse indtil der ikke er mere data i sættet
-            //    {
-            //        string? line = sr.ReadLine();
-            //        Console.WriteLine(line);
-            //    }
-
-            //    sr.Close();
-            //}
-
-            // Code to start the measurement
             stopwatch.Start();
-            while (true)
+            Task.Run(() =>
             {
-                // ** double value = adc.ReadDigitalValue();
-                double voltValue = converter.ConvertBitToVolt(value);
-                
-                FiveMinMeas.Add(voltValue);
+                while (true)
+                {
+                    double value = adc.ReadDigitalValue();
+                    double voltValue = converter.ConvertBitToVolt(value);
+
+                    Measurements.Add(new Measurement { Timestamp = DateTime.Now, Value = voltValue });
 
                 //if 5 min passed run update 
                 if (stopwatch.Elapsed.TotalMinutes >= 5) 
                 {
                     var outofbed = Analysedata(); // split list into 5 get average and then return true if it worked
                     if (outofbed)
+                    if (stopwatch.Elapsed.TotalMinutes >= 5)
                     {
-                        break;
+                        CalculateAndStoreAverage();
+                        stopwatch.Restart();
                     }
-                    // update disp console, opret display klasse (update)
-                    stopwatch.Restart();
-                    FiveMinMeas.Clear();
+
+                    Thread.Sleep(250); // Assuming measurements are taken every 250ms
                 }
-                
-                // if success clear list and sw
-                // start over
-            // logging?
-            // check for updates // events
-
-              //  if (stopwatch.Elapsed.TotalHours >= 8 /*|| B2.KeyPressed == 1 */ || value <= 1) // 1 er reference spænding = der er ingen i sengen
-                //{
-                  //  stopwatch.Stop();
-                    //break;
-                //}
-              
-            }
+            });
         }
 
-        public bool Analysedata() // measurement is the value from the ADC
+        private void CalculateAndStoreAverage()
         {
-            double average = FiveMinMeas.Average();
-            if (average < Threashold)
+            var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
+            double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
+            DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
+
+            AverageMeasurements.Add(new AverageMeasurement { Timestamp = firstMeasurementTime, AverageValue = averageValue });
+            SaveAverageMeasurementsToJson();
+        }
+
+        private void SaveAverageMeasurementsToJson()
+        {
+            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+            var dataToSave = AverageMeasurements.Select(a => new
             {
-                Console.WriteLine("Alarm");
-                CreateTask.Add(average);
-                // Kald display, update metode 
-                throw new ArgumentOutOfRangeException(); // excption: borger ikke længere i seng
-            }
-            CreateTask.Add(average);
-            return false;
+                TimeStamp = a.Timestamp.ToString("yyyy-MM-dd HH:mm"),
+                AverageValue = a.AverageValue
+            }).ToList();
 
-
+            string json = JsonConvert.SerializeObject(dataToSave, Formatting.Indented);
+            File.WriteAllText(jsonFilePath, json);
         }
+    }
 
-        private Exception ArgumentOutOfRangeException()
-        {
-            throw new ArgumentOutOfRangeException("Plejehjemsbeboeren er ikke længere i sengen");
-        }
+    public class Measurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double Value { get; set; }
+    }
 
+    public class AverageMeasurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double AverageValue { get; set; }
     }
 }
