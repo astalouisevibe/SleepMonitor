@@ -67,15 +67,16 @@ namespace SleepMonitor
             // Læs den målte værdi fra monimoni.csv
             double measuredValue = ReadMeasuredValueFromCsv(csvFilePath);
 
-            // Initialiser Controller med den målte værdi
-            Controller controller = new Controller(measuredValue);
-            API api = new API(controller);
+            // Initialiser ADC (du skal selv implementere oprettelsen af ADC objektet korrekt)
+            Adc adc = new Adc(); // Initialiser med korrekt constructor for din hardware
+            Controller controller = new Controller(adc);
 
             // Start målingen
             controller.StartReading();
 
-            // Kald API metoden til at behandle data og gemme som JSON
-            api.DataToJsonFile(csvFilePath, jsonFilePath);
+            // Programmet fortsætter med andre opgaver eller venter på brugerinput
+            Console.WriteLine("Målingen er startet. Tryk på en tast for at afslutte.");
+            Console.ReadKey();
         }
 
         static double ReadMeasuredValueFromCsv(string filePath)

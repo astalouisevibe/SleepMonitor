@@ -14,72 +14,87 @@ using Iot.Device.Adc; // ADC nuget-pakke
 using UnitsNet;
 using System.Runtime.Intrinsics.X86;
 using System.Device.Gpio;
+using Newtonsoft.Json;
 
 namespace SleepMonitor
 {
     public class Controller
-        {
-            public double Threshold = 0.5; // tilpasset
-            private RaspberryPiDll _rpi;
-            private RaspberryPiNetDll.Keys B2;
-            public Stopwatch stopwatch;
-            public Converter converter;
+    {
+        public double Threshold = 0.5; // tilpasset
+        private RaspberryPiDll _rpi;
+        private RaspberryPiNetDll.Keys B2;
+        public Stopwatch stopwatch = new Stopwatch();
+        public Converter converter = new Converter();
 
-            public List<double> FiveMinMeas { get; private set; } = new List<double>();
-            public List<double> CreateTask { get; private set; } = new List<double>();
+        public List<Measurement> Measurements { get; private set; } = new List<Measurement>();
+        public List<AverageMeasurement> AverageMeasurements { get; private set; } = new List<AverageMeasurement>();
 
-            private Adc adc;
-        private double measuredValue;
+        private Adc adc;
 
         public Controller(Adc adc)
-            {
-                stopwatch = new Stopwatch();
-                converter = new Converter();
-                _rpi = new RaspberryPiDll();
-                B2 = new RaspberryPiNetDll.Keys(_rpi, RaspberryPiNetDll.Keys.KEYS.SW2);
-                this.adc=adc; 
-            }
-
-        public Controller(double measuredValue)
         {
-            this.measuredValue = measuredValue;
+            converter = new Converter();
+            _rpi = new RaspberryPiDll();
+            B2 = new RaspberryPiNetDll.Keys(_rpi, RaspberryPiNetDll.Keys.KEYS.SW2);
+            this.adc = adc;
         }
 
         public void StartReading()
+        {
+            stopwatch.Start();
+            Task.Run(() =>
             {
-                stopwatch.Start();
-                while (stopwatch.Elapsed.TotalMinutes<=2)  // ændress til 5 minutter
+                while (true)
                 {
                     double value = adc.ReadDigitalValue();
                     double voltValue = converter.ConvertBitToVolt(value);
 
-                    FiveMinMeas.Add(voltValue);
+                    Measurements.Add(new Measurement { Timestamp = DateTime.Now, Value = voltValue });
 
-                    if (stopwatch.Elapsed.TotalMinutes >= 1)
+                    if (stopwatch.Elapsed.TotalMinutes >= 5)
                     {
-                        var outofbed = AnalyzeData();
-                        if (outofbed)
-                        {
-                            break;
-                        }
+                        CalculateAndStoreAverage();
                         stopwatch.Restart();
-                        FiveMinMeas.Clear();
                     }
-                }
-            }
 
-            public bool AnalyzeData()
+                    Thread.Sleep(250); // Assuming measurements are taken every 250ms
+                }
+            });
+        }
+
+        private void CalculateAndStoreAverage()
+        {
+            var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
+            double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
+            DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
+
+            AverageMeasurements.Add(new AverageMeasurement { Timestamp = firstMeasurementTime, AverageValue = averageValue });
+            SaveAverageMeasurementsToJson();
+        }
+
+        private void SaveAverageMeasurementsToJson()
+        {
+            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+            var dataToSave = AverageMeasurements.Select(a => new
             {
-                double average = FiveMinMeas.Average();
-                if (average < Threshold)
-                {
-                    Console.WriteLine("Alarm");
-                    CreateTask.Add(average);
-                Console.WriteLine("borger ikke i seng");
-            }
-                CreateTask.Add(average);
-                return false;
-            }
+                TimeStamp = a.Timestamp.ToString("yyyy-MM-dd HH:mm"),
+                AverageValue = a.AverageValue
+            }).ToList();
+
+            string json = JsonConvert.SerializeObject(dataToSave, Formatting.Indented);
+            File.WriteAllText(jsonFilePath, json);
         }
     }
 
+    public class Measurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double Value { get; set; }
+    }
+
+    public class AverageMeasurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double AverageValue { get; set; }
+    }
+}
