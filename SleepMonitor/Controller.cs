@@ -85,7 +85,7 @@ namespace SleepMonitor
                 FiveMinMeas.Add(voltValue);
 
                 //if 5 min passed run update 
-                if (stopwatch.Elapsed.TotalMinutes>=5) 
+                if (stopwatch.Elapsed.TotalMinutes >= 5) 
                 {
                     var outofbed = Analysedata(); // split list into 5 get average and then return true if it worked
                     if (outofbed)

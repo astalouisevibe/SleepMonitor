@@ -55,7 +55,10 @@ namespace SleepMonitor
      } 
     
 
-
+    // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
+    // publish / linux-arm : Indhold i mappen læggers over på RP
+    // "Fileshare" anvendes til at flere kan tilgå samme mappe
+    // Fileshare skal være en del af projektet - del af koden der skal lægges op
 
 
     // _______________________________________________________________
