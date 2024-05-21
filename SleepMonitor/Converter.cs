@@ -30,7 +30,7 @@ namespace SleepMonitor
                 // DEMO end
 
 
-                Downloader downloader = new Downloader("F23_Gruppe_05"); // Create a Downloader instance with the same group name
+                Downloader downloader = new Downloader("F24ST2GRP5"); // Create a Downloader instance with the same group name
                 List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
                 FileStream newLocalStream = new FileStream("monimoni.csv", FileMode.Create); // Create a new file to save data in
                 downloader.Load("monimoni", newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
