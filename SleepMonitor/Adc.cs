@@ -11,7 +11,7 @@ namespace SleepMonitor
 {
     // DEN RIGTIGE KLASSE TIL ADC
 
-      public class Adc
+    public class Adc
     {
         private SpiDevice mcp3008;
         private int channel;
@@ -51,34 +51,34 @@ namespace SleepMonitor
         // SIMULERET METODE TIL AT LÆSE FAST DIGITAL VÆRDI
 
 
-        
-            private double fixedValue;
 
-            //        // Read value from ADC
+        private double fixedValue;
 
-            //    public double ReadDigitalValue() // --> trådfunktion / thread
-            //  {
-            //    double value = mcp.Read(ChannelCount);
-            //double value = 20; // pseudo værdi
-            // values is between 0 and 1023
-            //  Console.WriteLine($"{value}");
-            // Thread.Sleep(250);
-            // return value;
-            //   }
-            // }
-            // }
-            public Adc(double fixedValue)
-            {
-                this.fixedValue = fixedValue;
-            }
+        //        // Read value from ADC
 
-            // Simuleret metode til at læse en fast digital værdi
-            public double ReadDigitalValue()
-            {
-                return fixedValue;
-            }
+        //    public double ReadDigitalValue() // --> trådfunktion / thread
+        //  {
+        //    double value = mcp.Read(ChannelCount);
+        //double value = 20; // pseudo værdi
+        // values is between 0 and 1023
+        //  Console.WriteLine($"{value}");
+        // Thread.Sleep(250);
+        // return value;
+        //   }
+        // }
+        // }
+        public Adc(double fixedValue)
+        {
+            this.fixedValue = fixedValue;
         }
-              }
+
+        // Simuleret metode til at læse en fast digital værdi
+        public double ReadDigitalValue()
+        {
+            return fixedValue;
+        }
+    }
+}
 
 
 

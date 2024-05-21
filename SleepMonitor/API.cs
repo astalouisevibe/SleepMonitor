@@ -57,7 +57,7 @@ namespace SleepMonitor
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+                    if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out double value)) //
                     {
                         values.Add(value);
                     }
