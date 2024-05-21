@@ -11,7 +11,7 @@ namespace SleepMonitor
 {
     // DEN RIGTIGE KLASSE TIL ADC
 
-      public class Adc
+    public class Adc
     {
         private SpiDevice mcp3008;
         private int channel;
@@ -38,10 +38,10 @@ namespace SleepMonitor
 
             mcp3008.TransferFullDuplex(writeBuffer, readBuffer);
 
-    // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
-    // publish / linux-arm : Indhold i mappen læggers over på RP
-    // "Fileshare" anvendes til at flere kan tilgå samme mappe
-    // Fileshare skal være en del af projektet - del af koden der skal lægges op
+            // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
+            // publish / linux-arm : Indhold i mappen læggers over på RP
+            // "Fileshare" anvendes til at flere kan tilgå samme mappe
+            // Fileshare skal være en del af projektet - del af koden der skal lægges op
             int result = ((readBuffer[1] & 0x03) << 8) + readBuffer[2];
 
             Console.WriteLine($"Digital value: {result}");
@@ -55,34 +55,31 @@ namespace SleepMonitor
         // SIMULERET METODE TIL AT LÆSE FAST DIGITAL VÆRDI
 
 
-        
-            private double fixedValue;
 
-            //        // Read value from ADC
+        private double fixedValue;
 
-            //    public double ReadDigitalValue() // --> trådfunktion / thread
-            //  {
-            //    double value = mcp.Read(ChannelCount);
-            //double value = 20; // pseudo værdi
-            // values is between 0 and 1023
-            //  Console.WriteLine($"{value}");
-            // Thread.Sleep(250);
-            // return value;
-            //   }
-            // }
-            // }
-            public Adc(double fixedValue)
-            {
-                this.fixedValue = fixedValue;
-            }
+        //        // Read value from ADC
 
-            // Simuleret metode til at læse en fast digital værdi
-            public double ReadDigitalValue()
-            {
-                return fixedValue;
-            }
+        //    public double ReadDigitalValue() // --> trådfunktion / thread
+        //  {
+        //    double value = mcp.Read(ChannelCount);
+        //double value = 20; // pseudo værdi
+        // values is between 0 and 1023
+        //  Console.WriteLine($"{value}");
+        // Thread.Sleep(250);
+        // return value;
+        //   }
+        // }
+        // }
+        public Adc(double fixedValue)
+        {
+            this.fixedValue = fixedValue;
         }
-              }
+
+        // Simuleret metode til at læse en fast digital værdi
+
+    }
+}
 
 
 
