@@ -21,8 +21,6 @@ namespace SleepMonitor
     public class Controller
     {
         public double Threshold = 0.5; // tilpasset
-        private RaspberryPiDll _rpi;
-        private RaspberryPiNetDll.Keys B2;
         public Stopwatch stopwatch = new Stopwatch();
         public Converter converter = new Converter();
 
@@ -33,9 +31,6 @@ namespace SleepMonitor
 
         public Controller(Adc adc)
         {
-            converter = new Converter();
-            _rpi = new RaspberryPiDll();
-            B2 = new RaspberryPiNetDll.Keys(_rpi, RaspberryPiNetDll.Keys.KEYS.SW2);
             this.adc = adc;
         }
 
@@ -47,25 +42,26 @@ namespace SleepMonitor
                 while (true)
                 {
                     double value = adc.ReadDigitalValue();
-                    double voltValue = converter.ConvertBitToVolt(value);
 
-                    Measurements.Add(new Measurement { Timestamp = DateTime.Now, Value = voltValue });
+                    Measurements.Add(new Measurement { Timestamp = DateTime.Now, Value = value });
 
-                //if 5 min passed run update 
-                if (stopwatch.Elapsed.TotalMinutes >= 5) 
-                {
-                    var outofbed = Analysedata(); // split list into 5 get average and then return true if it worked
-                    if (outofbed)
+                    //if 5 min passed run update 
                     if (stopwatch.Elapsed.TotalMinutes >= 5)
                     {
-                        CalculateAndStoreAverage();
-                        stopwatch.Restart();
-                    }
+                        var outofbed = Analysedata(); // split list into 5 get average and then return true if it worked
+                        if (outofbed)
+                            if (stopwatch.Elapsed.TotalMinutes >= 5)
+                            {
+                                CalculateAndStoreAverage();
+                                stopwatch.Restart();
+                            }
 
-                    Thread.Sleep(250); // Assuming measurements are taken every 250ms
+                        Thread.Sleep(250); // Assuming measurements are taken every 250ms
+                    }
                 }
             });
         }
+
 
         private void CalculateAndStoreAverage()
         {
@@ -103,3 +99,5 @@ namespace SleepMonitor
         public double AverageValue { get; set; }
     }
 }
+}
+
