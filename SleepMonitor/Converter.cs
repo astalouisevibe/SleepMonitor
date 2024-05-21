@@ -9,14 +9,38 @@ using Iot.Device.Adc;
 using RaspberryPiNetDll;
 using static RaspberryPiNetDll.Led;
 using Iot.Device.Adc;
+using FileShare;
 
 namespace SleepMonitor
 {
-    public class Converter
+    public class Converter 
     {
+        // Contructor?
+
         // Method to convert the specified analog voltage to a digital value
         public double ConvertBitToVolt(double value)
         {
+            try
+            {
+                // DEMO upload
+
+                Uploader uploader = new Uploader("F23_Gruppe_05"); // Create an Uploader instance with a group name
+                FileStream localFileStream = new FileStream("monimoni.csv", FileMode.Open); // Open a filestream to data
+                string filename = uploader.Save("monimoni", localFileStream); // Upload data to a file
+
+                // DEMO end
+
+
+                Downloader downloader = new Downloader("F23_Gruppe_05"); // Create a Downloader instance with the same group name
+                List<string> filesOnline = downloader.GetFilenames();
+                FileStream newLocalStream = new FileStream("monimoni", FileMode.Create); // Create a new file to save data in
+                downloader.Load("monimoni", newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("here");
+            }
+
             // express in percentage, rounds up to the nearest 10'th
             double PercentValue = Math.Round(value / 10.23);
             Console.WriteLine($"{PercentValue}%");
@@ -29,6 +53,8 @@ namespace SleepMonitor
 
             return VoltValue;
         }
+
+
     }
 
 

@@ -1,22 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Version>1.0.3</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AU.RaspberryPi.RaspberryPiDll" Version="1.0.0" />
-    <PackageReference Include="AU.ST2PRJ2.Fileshare" Version="1.0.4" />
-    <PackageReference Include="Iot.Device.Bindings" Version="3.1.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AU.RaspberryPi.RaspberryPiDll" Version="1.0.0" />
+		<PackageReference Include="AU.ST2PRJ2.Fileshare" Version="1.0.4" />
+		<PackageReference Include="Iot.Device.Bindings" Version="3.1.0" />
+		<PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+		<PackageReference Include="Google.Apis.Firebasestorage.v1beta" Version="1.59.0.2836" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="monimoni.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="monimoni.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
+

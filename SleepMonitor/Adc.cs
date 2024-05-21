@@ -38,6 +38,10 @@ namespace SleepMonitor
 
             mcp3008.TransferFullDuplex(writeBuffer, readBuffer);
 
+            // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
+            // publish / linux-arm : Indhold i mappen læggers over på RP
+            // "Fileshare" anvendes til at flere kan tilgå samme mappe
+            // Fileshare skal være en del af projektet - del af koden der skal lægges op
             int result = ((readBuffer[1] & 0x03) << 8) + readBuffer[2];
 
             Console.WriteLine($"Digital value: {result}");
@@ -72,6 +76,10 @@ namespace SleepMonitor
             this.fixedValue = fixedValue;
         }
 
+        // Simuleret metode til at læse en fast digital værdi
+
+    }
+}
         // Simuleret metode til at læse en fast digital værdi
         public double ReadDigitalValue()
         {

@@ -3,14 +3,15 @@ using System;
 using RaspberryPiNetDll;
 using System.Diagnostics.Metrics;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using FileShare;
-    using Newtonsoft.Json;
 using System.Globalization;
 
 namespace SleepMonitor
 {
     public class Program
     {
+
         // DEN RIGTIGE KODE 
         /*
             static void Main(string[] args)
