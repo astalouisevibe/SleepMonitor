@@ -21,11 +21,12 @@ namespace SleepMonitor
             Converter converter = new Converter();
             Adc adc = new Adc(0, 0, 0);
 
-            if (!_rpi.Open())
+        /*    if (!_rpi.Open())
             {
                 Console.WriteLine("Error with open communication to Raspberry Pi");
                 return;
             }
+        */
 
             double exampleValue = 512; // Example analog value
             converter.ConvertBitToVolt(exampleValue);

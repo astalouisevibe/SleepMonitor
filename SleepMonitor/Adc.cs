@@ -23,7 +23,7 @@ namespace SleepMonitor
                 ClockFrequency = 500000, // Juster om nødvendigt
                 Mode = SpiMode.Mode0
             };
-            mcp3008 = SpiDevice.Create(settings);
+         //   mcp3008 = SpiDevice.Create(settings);
             this.channel = channel;
         }
 
@@ -36,7 +36,7 @@ namespace SleepMonitor
             writeBuffer[1] = (byte)((8 + channel) << 4); // Single-ended mode, kanal valgt
             writeBuffer[2] = 0x00; // "Don't care" byte
 
-            mcp3008.TransferFullDuplex(writeBuffer, readBuffer);
+          //  mcp3008.TransferFullDuplex(writeBuffer, readBuffer);
 
             // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
             // publish / linux-arm : Indhold i mappen læggers over på RP
