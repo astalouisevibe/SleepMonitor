@@ -70,20 +70,9 @@ namespace SleepMonitor
             DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
 
             AverageMeasurements.Add(new AverageMeasurement { Timestamp = firstMeasurementTime, AverageValue = averageValue });
-            SaveAverageMeasurementsToJson();
         }
 
-        private void SaveAverageMeasurementsToJson()
-        {
-            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
-            var dataToSave = AverageMeasurements.Select(a => new
-            {
-                TimeStamp = a.Timestamp.ToString("yyyy-MM-dd HH:mm"),
-                AverageValue = a.AverageValue
-            }).ToList();
 
-            string json = JsonConvert.SerializeObject(dataToSave, Formatting.Indented);
-            File.WriteAllText(jsonFilePath, json);
         }
     }
 
@@ -98,6 +87,5 @@ namespace SleepMonitor
         public DateTime Timestamp { get; set; }
         public double AverageValue { get; set; }
     }
-}
-}
+
 
