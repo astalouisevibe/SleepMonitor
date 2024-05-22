@@ -47,6 +47,8 @@ namespace SleepMonitor
             Console.WriteLine($"Digital value: {result}");
             return result;
         }
+    }
+}
 
 
         // _______________________________________________________________
@@ -56,7 +58,6 @@ namespace SleepMonitor
 
 
 
-        private double fixedValue;
 
         //        // Read value from ADC
 
@@ -71,26 +72,7 @@ namespace SleepMonitor
         //   }
         // }
         // }
-        public Adc(double fixedValue)
-        {
-            this.fixedValue = fixedValue;
-        }
-
-        // Simuleret metode til at læse en fast digital værdi
-
-    }
-}
-        // Simuleret metode til at læse en fast digital værdi
-        public double ReadDigitalValue()
-        {
-            return fixedValue;
-        }
-    }
-}
-
-
-
-
+   
 
 
 

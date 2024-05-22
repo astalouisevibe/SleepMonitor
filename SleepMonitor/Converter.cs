@@ -60,7 +60,7 @@ namespace SleepMonitor
             return VoltValue;
         }
 
-        private List<Observations> ReadDataFromStream(FileStream stream)
+        public List<Observations> ReadDataFromStream(FileStream stream)
         {
             List<Observations> observations = new List<Observations>();
             using (StreamReader reader = new StreamReader(stream))
@@ -80,12 +80,9 @@ namespace SleepMonitor
             }
             return observations;
         }
-
-
         private void CalculateAndStoreAverage()
         {
             var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
-            // ** streamreader i stedet for lastFiveMinutesMeasurements
             double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
             DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
 
@@ -106,14 +103,28 @@ namespace SleepMonitor
             File.WriteAllText(jsonFilePath, json);
         }
 
+        public List<Measurement> Measurements { get; set; }
+        public List<FiveMinMeas> AverageMeasurements { get; set; }
 
+        public Converter()
+        {
+            Measurements = new List<Measurement>();
+            AverageMeasurements = new List<FiveMinMeas>();
+        }
     }
+
     public class FiveMinMeas
     {
         public DateTime Timestamp { get; set; }
         public double AverageValue { get; set; }
     }
 
+
+    public class Measurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double Value { get; set; }
+    }
 
     //______________________________________________________________________________________
 
