@@ -13,18 +13,13 @@ namespace SleepMonitor
     {
 
         // DEN RIGTIGE KODE 
-        /*
+        
             static void Main(string[] args)
             {
                 // Opret instanser af nødvendige objekter
                 RaspberryPiDll _rpi = new RaspberryPiDll();
-                RaspberryPiNetDll.Keys B1 = new Keys(_rpi, Keys.KEYS.SW1);
-
-                // Opret en instans af Converter klassen
                 Converter converter = new Converter();
-
-                // Opret en instans af Adc klassen
-                Adc adc = new Adc();
+                Adc adc = new Adc(0,0,0);
 
                 if (!_rpi.Open())
                 {
@@ -32,6 +27,7 @@ namespace SleepMonitor
                     return;
                 }
 
+            
 
                 // Læs bitværdi fra ADC'en
                 double bitValue = adc.ReadDigitalValue();
@@ -43,15 +39,10 @@ namespace SleepMonitor
                 Controller controller = new Controller(Convert.ToInt32(voltValue));
 
                 // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
-                controller.StartReading();
+            
 
-
-                //UDVIDELSE MED KNAPTRYK
-                /* if (B1.KeyPressed == 1)
-                {
-                    controller.StartReading();
-                }
-                */
+            
+               
 
 
 

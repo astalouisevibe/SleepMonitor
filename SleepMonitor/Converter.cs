@@ -56,7 +56,7 @@ namespace SleepMonitor
 
         private void CalculateAndStoreAverage()
         {
-            //var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
+            var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
             // ** streamreader i stedet for lastFiveMinutesMeasurements
             double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
             DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
