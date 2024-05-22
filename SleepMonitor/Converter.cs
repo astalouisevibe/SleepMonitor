@@ -35,10 +35,16 @@ namespace SleepMonitor
                 FileStream newLocalStream = new FileStream(filesOnline[filesOnline.Count], FileMode.Create); // Create a new file to save data in
                 downloader.Load(filesOnline[filesOnline.Count], newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
                 // streamreader --> **
+
+                var observations = ReadDataFromStream(newLocalStream);
+                foreach (var observation in observations)
+                {
+                    Console.WriteLine($"Status: {observation.ObservationStatus}, Code: {observation.ObservationCode}, Issued: {observation.ObservationIssued}, Performer: {observation.ObservationPerformer}");
+                }
             }
             catch (Exception)
             {
-                Console.WriteLine("here");
+                Console.WriteLine("Fejl i upload og/eller download");
             }
 
             // express in percentage, rounds up to the nearest 10'th
@@ -53,6 +59,28 @@ namespace SleepMonitor
 
             return VoltValue;
         }
+
+        private List<Observations> ReadDataFromStream(FileStream stream)
+        {
+            List<Observations> observations = new List<Observations>();
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var data = line.Split(','); // Assuming CSV format
+                    observations.Add(new Observations
+                    {
+                        ObservationStatus = bool.Parse(data[0]),
+                        ObservationCode = data[1],
+                        ObservationIssued = DateTime.Parse(data[2]),
+                        ObservationPerformer = data[3]
+                    });
+                }
+            }
+            return observations;
+        }
+
 
         private void CalculateAndStoreAverage()
         {
