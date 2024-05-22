@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Iot.Device.Adc;
 using RaspberryPiNetDll;
-using static RaspberryPiNetDll.Led;
 using Iot.Device.Adc;
 using FileShare;
+using Newtonsoft.Json;
+using System.Diagnostics.Metrics;
 
 namespace SleepMonitor
 {
@@ -23,18 +24,17 @@ namespace SleepMonitor
             try
             {
                 // DEMO upload
-
-                Uploader uploader = new Uploader("F23_Gruppe_05"); // Create an Uploader instance with a group name
-                FileStream localFileStream = new FileStream("monimoni.csv", FileMode.Open); // Open a filestream to data
-                string filename = uploader.Save("monimoni", localFileStream); // Upload data to a file
-
+                //Uploader uploader = new Uploader("F23_Gruppe_05"); // Create an Uploader instance with a group name
+                //FileStream localFileStream = new FileStream("monimoni.csv", FileMode.Open); // Open a filestream to data
+                //string filename = uploader.Save("monimoni", localFileStream); // Upload data to a file
                 // DEMO end
 
 
-                Downloader downloader = new Downloader("F23_Gruppe_05"); // Create a Downloader instance with the same group name
-                List<string> filesOnline = downloader.GetFilenames();
-                FileStream newLocalStream = new FileStream("monimoni", FileMode.Create); // Create a new file to save data in
+                Downloader downloader = new Downloader("F24ST2GRP5"); // Create a Downloader instance with the same group name
+                List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
+                FileStream newLocalStream = new FileStream("monimoni.csv", FileMode.Create); // Create a new file to save data in
                 downloader.Load("monimoni", newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
+                // streamreader --> **
             }
             catch (Exception)
             {
@@ -54,7 +54,36 @@ namespace SleepMonitor
             return VoltValue;
         }
 
+        private void CalculateAndStoreAverage()
+        {
+            //var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
+            // ** streamreader i stedet for lastFiveMinutesMeasurements
+            double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
+            DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
 
+            AverageMeasurements.Add(new FiveMinMeas { Timestamp = firstMeasurementTime, AverageValue = averageValue });
+            SaveAverageMeasurementsToJson();
+        }
+
+        private void SaveAverageMeasurementsToJson()
+        {
+            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+            var dataToSave = AverageMeasurements.Select(a => new
+            {
+                TimeStamp = a.Timestamp.ToString("yyyy-MM-dd HH:mm"),
+                AverageValue = a.AverageValue
+            }).ToList();
+
+            string json = JsonConvert.SerializeObject(dataToSave, Formatting.Indented);
+            File.WriteAllText(jsonFilePath, json);
+        }
+
+
+    }
+    public class FiveMinMeas
+    {
+        public DateTime Timestamp { get; set; }
+        public double AverageValue { get; set; }
     }
 
 
