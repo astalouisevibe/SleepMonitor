@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleepMonitor", "SleepMonitor\SleepMonitor.csproj", "{A7418ED8-015C-43E8-BA95-4E915C4D7A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleepMonitor", "SleepMonitor\SleepMonitor.csproj", "{A7418ED8-015C-43E8-BA95-4E915C4D7A0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testFileShare", "testFileShare\testFileShare.csproj", "{DFB2FD04-5BE5-41C1-9BC8-BEC08F770C0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A7418ED8-015C-43E8-BA95-4E915C4D7A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7418ED8-015C-43E8-BA95-4E915C4D7A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7418ED8-015C-43E8-BA95-4E915C4D7A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB2FD04-5BE5-41C1-9BC8-BEC08F770C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB2FD04-5BE5-41C1-9BC8-BEC08F770C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB2FD04-5BE5-41C1-9BC8-BEC08F770C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB2FD04-5BE5-41C1-9BC8-BEC08F770C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
