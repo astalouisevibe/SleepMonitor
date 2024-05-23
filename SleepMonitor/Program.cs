@@ -33,12 +33,7 @@ namespace SleepMonitor
 
 
 
-            // Læs bitværdi fra ADC'en
-            double bitValue = adc.ReadDigitalValue();
-
-            // Konverter bitværdi til volt ved hjælp af ConvertBitToVolt metoden i Converter klassen
-            double voltValue = converter.ConvertBitToVolt(bitValue);
-
+           
 
 
             // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen

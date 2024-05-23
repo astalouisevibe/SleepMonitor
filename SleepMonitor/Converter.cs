@@ -52,7 +52,7 @@ namespace SleepMonitor
             Console.WriteLine($"{PercentValue}%");
 
             // express in volt
-            double VoltValue = ((value * 3.3) / 1023); //ref spænding måske ændres
+            double VoltValue = ((value * 5) / 1023); //ref spænding måske ændres
             Console.WriteLine($"{VoltValue} volt");
 
             Debug.WriteLine($"{VoltValue}%");
