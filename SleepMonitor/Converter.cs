@@ -71,7 +71,7 @@ namespace SleepMonitor
                     var data = line.Split(','); // Assuming CSV format
                     observations.Add(new Observations
                     {
-                        ObservationStatus = bool.Parse(data[0]),
+                        //ObservationStatus = bool.Parse(data[0]),
                         ObservationCode = data[1],
                         ObservationIssued = DateTime.Parse(data[2]),
                         ObservationPerformer = data[3]
