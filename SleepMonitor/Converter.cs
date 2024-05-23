@@ -30,11 +30,20 @@ namespace SleepMonitor
                 // DEMO end
 
 
-                Downloader downloader = new Downloader("F24ST2GRP5"); // Create a Downloader instance with the same group name
+                //Downloader downloader = new Downloader("F24ST2GRP5"); // Create a Downloader instance with the same group name
+                //List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
+                //FileStream newLocalStream = new FileStream(filesOnline[filesOnline.Count], FileMode.Create); // Create a new file to save data in
+                //downloader.Load(filesOnline[filesOnline.Count], newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
+                //// streamreader --> **
+                
+                // Test
+                Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
                 List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
-                FileStream newLocalStream = new FileStream(filesOnline[filesOnline.Count], FileMode.Create); // Create a new file to save data in
-                downloader.Load(filesOnline[filesOnline.Count], newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
+                FileStream newLocalStream = new FileStream("TestWithRandomNumbers.cvs", FileMode.Create); // Create a new file to save data in
+                downloader.Load("test", newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
                 // streamreader --> **
+
+
             }
             catch (Exception)
             {
