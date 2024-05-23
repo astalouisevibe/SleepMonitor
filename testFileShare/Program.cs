@@ -41,7 +41,15 @@ namespace testFileShare
                         {
                             var number = Convert.ToInt32(data);
                             // gemme i 5 min liste
-                            Console.WriteLine(number);
+                            //Console.WriteLine(number);
+
+                            Observation observation = new Observation
+                            {
+                                ObservationCode = data,
+                                ObservationIssued = DateTime.Now:f,
+                                ObservationPerformer = "Plejehjemspersonale"
+                            }
+                            Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued}, Performer: {observation.ObservationPerformer}}");
                         }
                         catch 
                         { 

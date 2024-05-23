@@ -9,7 +9,6 @@ namespace SleepMonitor
   
     public class Observations
     {
-        public bool ObservationStatus { get; set; }
         
         public string ObservationCode { get; set; }
         public DateTime ObservationIssued { get; set; }

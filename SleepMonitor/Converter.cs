@@ -14,7 +14,7 @@ using System.Diagnostics.Metrics;
 
 namespace SleepMonitor
 {
-    public class Converter 
+    public class Converter
     {
         // Contructor?
 
@@ -35,7 +35,7 @@ namespace SleepMonitor
                 //FileStream newLocalStream = new FileStream(filesOnline[filesOnline.Count], FileMode.Create); // Create a new file to save data in
                 //downloader.Load(filesOnline[filesOnline.Count], newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
                 //// streamreader --> **
-                
+
                 // Test
                 Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
                 List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
@@ -51,7 +51,7 @@ namespace SleepMonitor
             }
 
 
-            }
+
             catch (Exception)
             {
                 Console.WriteLine("Fejl i upload og/eller download");
@@ -90,6 +90,7 @@ namespace SleepMonitor
             }
             return observations;
         }
+
         private void CalculateAndStoreAverage()
         {
             var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
@@ -121,20 +122,22 @@ namespace SleepMonitor
             Measurements = new List<Measurement>();
             AverageMeasurements = new List<FiveMinMeas>();
         }
-    }
-
-    public class FiveMinMeas
-    {
-        public DateTime Timestamp { get; set; }
-        public double AverageValue { get; set; }
-    }
 
 
-    public class Measurement
-    {
-        public DateTime Timestamp { get; set; }
-        public double Value { get; set; }
+        public class FiveMinMeas
+        {
+            public DateTime Timestamp { get; set; }
+            public double AverageValue { get; set; }
+        }
+
+
+        public class Measurement
+        {
+            public DateTime Timestamp { get; set; }
+            public double Value { get; set; }
+        }
     }
+}
 
     //______________________________________________________________________________________
 
@@ -146,4 +149,4 @@ namespace SleepMonitor
          this.bitValue = bitValue;
      }
     */
-}
+
