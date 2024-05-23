@@ -43,11 +43,18 @@ namespace SleepMonitor
                 downloader.Load("test", newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
                 // streamreader --> **
 
+                var observations = ReadDataFromStream(newLocalStream);
+                foreach (var observation in observations)
+                {
+                    Console.WriteLine($"Status: {observation.ObservationStatus}, Code: {observation.ObservationCode}, Issued: {observation.ObservationIssued}, Performer: {observation.ObservationPerformer}");
+                }
+            }
+
 
             }
             catch (Exception)
             {
-                Console.WriteLine("here");
+                Console.WriteLine("Fejl i upload og/eller download");
             }
 
             // express in percentage, rounds up to the nearest 10'th
@@ -63,10 +70,29 @@ namespace SleepMonitor
             return VoltValue;
         }
 
+        public List<Observations> ReadDataFromStream(FileStream stream)
+        {
+            List<Observations> observations = new List<Observations>();
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var data = line.Split(','); // Assuming CSV format
+                    observations.Add(new Observations
+                    {
+                        ObservationStatus = bool.Parse(data[0]),
+                        ObservationCode = data[1],
+                        ObservationIssued = DateTime.Parse(data[2]),
+                        ObservationPerformer = data[3]
+                    });
+                }
+            }
+            return observations;
+        }
         private void CalculateAndStoreAverage()
         {
-            //var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
-            // ** streamreader i stedet for lastFiveMinutesMeasurements
+            var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
             double averageValue = lastFiveMinutesMeasurements.Average(m => m.Value);
             DateTime firstMeasurementTime = lastFiveMinutesMeasurements.First().Timestamp;
 
@@ -87,14 +113,28 @@ namespace SleepMonitor
             File.WriteAllText(jsonFilePath, json);
         }
 
+        public List<Measurement> Measurements { get; set; }
+        public List<FiveMinMeas> AverageMeasurements { get; set; }
 
+        public Converter()
+        {
+            Measurements = new List<Measurement>();
+            AverageMeasurements = new List<FiveMinMeas>();
+        }
     }
+
     public class FiveMinMeas
     {
         public DateTime Timestamp { get; set; }
         public double AverageValue { get; set; }
     }
 
+
+    public class Measurement
+    {
+        public DateTime Timestamp { get; set; }
+        public double Value { get; set; }
+    }
 
     //______________________________________________________________________________________
 

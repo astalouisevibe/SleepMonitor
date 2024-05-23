@@ -57,7 +57,7 @@ namespace SleepMonitor
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+                    if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out double value)) //
                     {
                         values.Add(value);
                     }
@@ -67,7 +67,7 @@ namespace SleepMonitor
             return values;
         }
 
-        private double CalculateAverage(List<double> values, int count)
+        private double CalculateAverage(List<double> values, int count) // ligges i converter
         {
             // Hvis der er færre værdier end count, så beregn gennemsnittet af alle tilgængelige værdier
             int actualCount = Math.Min(values.Count, count);

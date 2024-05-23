@@ -13,91 +13,83 @@ namespace SleepMonitor
     {
 
         // DEN RIGTIGE KODE 
-        /*
-            static void Main(string[] args)
-            {
-                // Opret instanser af nødvendige objekter
-                RaspberryPiDll _rpi = new RaspberryPiDll();
-                RaspberryPiNetDll.Keys B1 = new Keys(_rpi, Keys.KEYS.SW1);
-
-                // Opret en instans af Converter klassen
-                Converter converter = new Converter();
-
-                // Opret en instans af Adc klassen
-                Adc adc = new Adc();
-
-                if (!_rpi.Open())
-                {
-                    Console.WriteLine("Error with open communication to Raspberry Pi");
-                    return;
-                }
-
-
-                // Læs bitværdi fra ADC'en
-                double bitValue = adc.ReadDigitalValue();
-
-                // Konverter bitværdi til volt ved hjælp af ConvertBitToVolt metoden i Converter klassen
-                double voltValue = converter.ConvertBitToVolt(bitValue);
-
-                // Opret en instans af Controller klassen og lever voltværdien som parameter
-                Controller controller = new Controller(Convert.ToInt32(voltValue));
-
-                // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
-                controller.StartReading();
-
-
-                //UDVIDELSE MED KNAPTRYK
-                /* if (B1.KeyPressed == 1)
-                {
-                    controller.StartReading();
-                }
-                */
-
-
-
-        // _______________________________________________________________
-
-        // SIMULERET KODE TIL AT TESTE
-        // BN: pi, PW: raspberry, 
 
         static void Main(string[] args)
         {
-            string csvFilePath = "..\\..\\..\\monimoni.csv";
-            string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+            // Opret instanser af nødvendige objekter
+            RaspberryPiDll _rpi = new RaspberryPiDll();
+            Converter converter = new Converter();
+            Adc adc = new Adc(0, 0, 0);
 
-            // Læs den målte værdi fra monimoni.csv
-            double measuredValue = ReadMeasuredValueFromCsv(csvFilePath);
-
-            // Initialiser ADC (du skal selv implementere oprettelsen af ADC objektet korrekt)
-            Adc adc = new Adc(0,0,0); // Initialiser med korrekt constructor for din hardware
-            Controller controller = new Controller(adc);
-
-            // Start målingen
-            controller.StartReading();
-
-            // Programmet fortsætter med andre opgaver eller venter på brugerinput
-            Console.WriteLine("Målingen er startet. Tryk på en tast for at afslutte.");
-            Console.ReadKey();
-        }
-
-        static double ReadMeasuredValueFromCsv(string filePath)
-        {
-            double measuredValue = 0.0;
-
-            using (var reader = new StreamReader(filePath))
+        /*    if (!_rpi.Open())
             {
-                // Spring header-linjen over, hvis der er en
-                string headerLine = reader.ReadLine();
+                Console.WriteLine("Error with open communication to Raspberry Pi");
+                return;
+            }
+        */
 
-                // Læs den første linje i .csv filen
-                string firstLine = reader.ReadLine();
-                if (double.TryParse(firstLine, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
-                {
-                    measuredValue = value;
-                }
+            double exampleValue = 512; // Example analog value
+            converter.ConvertBitToVolt(exampleValue);
+
+
+
+            // Læs bitværdi fra ADC'en
+            double bitValue = adc.ReadDigitalValue();
+
+            // Konverter bitværdi til volt ved hjælp af ConvertBitToVolt metoden i Converter klassen
+            double voltValue = converter.ConvertBitToVolt(bitValue);
+
+
+
+            // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
+
+
+
+
+
+
+
+            // _______________________________________________________________
+
+            // SIMULERET KODE TIL AT TESTE
+            // BN: pi, PW: raspberry, 
+
+            static void Main(string[] args)
+            {
+                string csvFilePath = "..\\..\\..\\monimoni.csv";
+                string jsonFilePath = "..\\..\\..\\Sleepdata.json";
+
+                // Læs den målte værdi fra monimoni.csv
+                double measuredValue = ReadMeasuredValueFromCsv(csvFilePath);
+
+                // Initialiser ADC (du skal selv implementere oprettelsen af ADC objektet korrekt)
+                Adc adc = new Adc(0, 0, 0); // Initialiser med korrekt constructor for din hardware
+
+
+                // Programmet fortsætter med andre opgaver eller venter på brugerinput
+                Console.WriteLine("Målingen er startet. Tryk på en tast for at afslutte.");
+                Console.ReadKey();
             }
 
-            return measuredValue;
+            static double ReadMeasuredValueFromCsv(string filePath)
+            {
+                double measuredValue = 0.0;
+
+                using (var reader = new StreamReader(filePath))
+                {
+                    // Spring header-linjen over, hvis der er en
+                    string headerLine = reader.ReadLine();
+
+                    // Læs den første linje i .csv filen
+                    string firstLine = reader.ReadLine();
+                    if (double.TryParse(firstLine, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+                    {
+                        measuredValue = value;
+                    }
+                }
+
+                return measuredValue;
+            }
         }
     }
 }
