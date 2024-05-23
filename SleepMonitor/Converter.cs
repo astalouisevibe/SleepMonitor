@@ -16,6 +16,90 @@ namespace SleepMonitor
 {
     public class Converter
     {
+        public void ProcessFilesAndCreateObservations()
+        {
+            string filename = $"Data_{DateTime.Now:d}";
+            List<string> UpdatedFiles = new List<string>();
+
+            try
+            {
+                Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
+                List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
+
+                foreach (var file in filesOnline)
+                {
+                    if (file.StartsWith(filename))
+                    {
+                        Console.WriteLine(file);
+                        UpdatedFiles.Add(file);
+                    }
+                }
+
+                foreach (var update in UpdatedFiles)
+                {
+                    FileStream newLocalStream = new FileStream(update, FileMode.Create);
+                    downloader.Load(update, newLocalStream);
+                }
+
+                foreach (var update in UpdatedFiles)
+                {
+                    string[] readData = File.ReadAllLines(update);
+                    foreach (var data in readData)
+                    {
+                        try
+                        {
+                            var number = Convert.ToInt32(data);
+                            // gemme i 5 min liste
+                            //Console.WriteLine(number);
+
+                            // Opret en observation baseret på de specificerede egenskaber
+                            Observations observation = new Observations
+                            {
+                                ObservationCode = Convert.ToString(number),
+                                ObservationIssued = DateTime.Now,
+                                ObservationPerformer = "Plejehjemspersonale"
+                            };
+
+                            // Brug observationen efter behov
+                            Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+                    }
+                    //  avarage beregner
+                    // printe alarm hvis graensevaerdi er over
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+    }
+}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        
+        
+        
         // Contructor?
 
         // Method to convert the specified analog voltage to a digital value
@@ -138,7 +222,7 @@ namespace SleepMonitor
         }
     }
 }
-
+        */
     //______________________________________________________________________________________
 
     // KAN IKKE HUSKE OM DETTE BRUGES I SIMULERING - AFVENT SLETNING

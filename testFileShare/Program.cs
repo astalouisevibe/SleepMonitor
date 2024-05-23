@@ -43,16 +43,17 @@ namespace testFileShare
                             // gemme i 5 min liste
                             //Console.WriteLine(number);
 
-                            Observation observation = new Observation
+                            Observations observation = new Observations
                             {
-                                ObservationCode = data,
+                                ObservationCode = number,
                                 ObservationIssued = DateTime.Now:f,
                                 ObservationPerformer = "Plejehjemspersonale"
                             }
                             Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued}, Performer: {observation.ObservationPerformer}}");
                         }
-                        catch 
-                        { 
+                        catch (Exception e)
+                        {
+                        
                         }
 
                     }
