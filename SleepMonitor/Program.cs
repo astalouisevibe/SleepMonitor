@@ -21,15 +21,20 @@ namespace SleepMonitor
             Converter converter = new Converter();
             Adc adc = new Adc(0, 0, 0);
 
-        /*    if (!_rpi.Open())
-            {
-                Console.WriteLine("Error with open communication to Raspberry Pi");
-                return;
-            }
-        */
+            converter.ProcessFilesAndCreateObservations();
+        }
+    }
+}
 
-            double exampleValue = 512; // Example analog value
-            converter.ConvertBitToVolt(exampleValue);
+            /*    if (!_rpi.Open())
+                {
+                    Console.WriteLine("Error with open communication to Raspberry Pi");
+                    return;
+                }
+            */
+
+           // double exampleValue = 512; // Example analog value
+          //  converter.ConvertBitToVolt(exampleValue);
 
 
 
@@ -49,6 +54,7 @@ namespace SleepMonitor
             // SIMULERET KODE TIL AT TESTE
             // BN: pi, PW: raspberry, 
 
+            /*
             static void Main(string[] args)
             {
                 string csvFilePath = "..\\..\\..\\monimoni.csv";
@@ -218,6 +224,7 @@ namespace SleepMonitor
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             } */
+
 
 
 
