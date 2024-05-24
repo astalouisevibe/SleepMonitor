@@ -41,14 +41,15 @@ namespace SleepMonitor
                     downloader.Load(update, newLocalStream);
                 }
 
+          
                 foreach (var update in UpdatedFiles)
                 {
                     string[] readData = File.ReadAllLines(update);
                     foreach (var data in readData)
                     {
-                        try
+                        if (int.TryParse(data, out int number))
                         {
-                            var number = Convert.ToInt32(data);
+                            //var number = Convert.ToInt32(data);
                             // gemme i 5 min liste
                             //Console.WriteLine(number);
 
@@ -63,9 +64,9 @@ namespace SleepMonitor
                             // Brug observationen efter behov
                             Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
                         }
-                        catch (Exception e)
+                        else
                         {
-                            Console.WriteLine(e);
+                            Console.WriteLine(" ");
                         }
                     }
                     //  avarage beregner
