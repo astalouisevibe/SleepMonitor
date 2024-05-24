@@ -49,28 +49,29 @@ namespace SleepMonitor
                     {
                         if (int.TryParse(data, out int number))
                         {
-                            //var number = Convert.ToInt32(data);
-                            // gemme i 5 min liste
-                            //Console.WriteLine(number);
-
                             // Opret en observation baseret på de specificerede egenskaber
                             Observations observation = new Observations
                             {
                                 ObservationCode = Convert.ToString(number),
                                 ObservationIssued = DateTime.Now,
                                 ObservationPerformer = "Plejehjemspersonale"
+
                             };
 
-                            // Brug observationen efter behov
-                            Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
+                            if (number <= 143)
+                            {
+                                Console.WriteLine("Borger er ikke i seng");
+                                break;
+                                    }
+
+                                // Brug observationen efter behov
+                                Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
                         }
                         else
                         {
                             Console.WriteLine(" ");
                         }
                     }
-                    //  avarage beregner
-                    // printe alarm hvis graensevaerdi er over
                 }
             }
             catch (Exception e)

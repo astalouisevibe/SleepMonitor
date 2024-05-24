@@ -9,8 +9,6 @@ using Iot.Device.Adc;
 
 namespace SleepMonitor
 {
-    // DEN RIGTIGE KLASSE TIL ADC
-
     public class Adc
     {
         private SpiDevice mcp3008;
@@ -23,7 +21,7 @@ namespace SleepMonitor
                 ClockFrequency = 500000, // Juster om nødvendigt
                 Mode = SpiMode.Mode0
             };
-         //   mcp3008 = SpiDevice.Create(settings);
+         //mcp3008 = SpiDevice.Create(settings);
             this.channel = channel;
         }
     }

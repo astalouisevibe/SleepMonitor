@@ -12,10 +12,9 @@ namespace SleepMonitor
     public class Program
     {
 
-        // DEN RIGTIGE KODE 
-
         static void Main(string[] args)
         {
+
             // Opret instanser af nødvendige objekter
             RaspberryPiDll _rpi = new RaspberryPiDll();
             Converter converter = new Converter();
