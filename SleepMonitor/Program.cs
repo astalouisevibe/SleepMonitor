@@ -11,10 +11,8 @@ namespace SleepMonitor
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
-
             // Opret instanser af nødvendige objekter
             string jsonFilePath = "..\\..\\..\\Sleepdata.json";
             Converter converter = new Converter();
