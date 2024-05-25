@@ -1,4 +1,27 @@
-{
-  "TimeStamp": "2024-05-19 10:37",
-  "AverageValue": 0.0
-}
+[
+  {
+    "ObservationCode": "280",
+    "ObservationIssued": "2024-05-24T13:13:08.5914644+02:00",
+    "ObservationPerformer": "Plejehjemspersonale"
+  },
+  {
+    "ObservationCode": "300",
+    "ObservationIssued": "2024-05-24T13:13:08.5924597+02:00",
+    "ObservationPerformer": "Plejehjemspersonale"
+  },
+  {
+    "ObservationCode": "151",
+    "ObservationIssued": "2024-05-24T13:13:08.5946825+02:00",
+    "ObservationPerformer": "Plejehjemspersonale"
+  },
+  {
+    "ObservationCode": "186",
+    "ObservationIssued": "2024-05-24T13:13:08.5947579+02:00",
+    "ObservationPerformer": "Plejehjemspersonale"
+  },
+  {
+    "ObservationCode": "47",
+    "ObservationIssued": "2024-05-24T13:13:08.5948351+02:00",
+    "ObservationPerformer": "Plejehjemspersonale"
+  }
+]
