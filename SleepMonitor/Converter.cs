@@ -14,8 +14,94 @@ using System.Diagnostics.Metrics;
 
 namespace SleepMonitor
 {
-    public class Converter 
+    public class Converter
     {
+        public void ProcessFilesAndCreateObservations()
+        {
+            string filename = $"Data_{DateTime.Now:d}";
+            List<string> UpdatedFiles = new List<string>();
+
+            try
+            {
+                Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
+                List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
+
+                foreach (var file in filesOnline)
+                {
+                    if (file.StartsWith(filename))
+                    {
+                        Console.WriteLine(file);
+                        UpdatedFiles.Add(file);
+                    }
+                }
+
+                foreach (var update in UpdatedFiles)
+                {
+                    FileStream newLocalStream = new FileStream(update, FileMode.Create);
+                    downloader.Load(update, newLocalStream);
+                }
+
+          
+                foreach (var update in UpdatedFiles)
+                {
+                    string[] readData = File.ReadAllLines(update);
+                    foreach (var data in readData)
+                    {
+                        if (int.TryParse(data, out int number))
+                        {
+                            // Opret en observation baseret på de specificerede egenskaber
+                            Observations observation = new Observations
+                            {
+                                ObservationCode = Convert.ToString(number),
+                                ObservationIssued = DateTime.Now,
+                                ObservationPerformer = "Plejehjemspersonale"
+
+                            };
+
+                            if (number <= 143)
+                            {
+                                Console.WriteLine("Borger er ikke i seng");
+                                break;
+                                    }
+
+                                // Brug observationen efter behov
+                                Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
+                        }
+                        else
+                        {
+                            Console.WriteLine(" ");
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+    }
+}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        
+        
+        
         // Contructor?
 
         // Method to convert the specified analog voltage to a digital value
@@ -35,7 +121,7 @@ namespace SleepMonitor
                 //FileStream newLocalStream = new FileStream(filesOnline[filesOnline.Count], FileMode.Create); // Create a new file to save data in
                 //downloader.Load(filesOnline[filesOnline.Count], newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
                 //// streamreader --> **
-                
+
                 // Test
                 Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
                 List<string> filesOnline = downloader.GetFilenames(); // find navn på fil
@@ -51,7 +137,7 @@ namespace SleepMonitor
             }
 
 
-            }
+
             catch (Exception)
             {
                 Console.WriteLine("Fejl i upload og/eller download");
@@ -62,7 +148,7 @@ namespace SleepMonitor
             Console.WriteLine($"{PercentValue}%");
 
             // express in volt
-            double VoltValue = ((value * 3.3) / 1023); //ref spænding måske ændres
+            double VoltValue = ((value * 5) / 1023); //ref spænding måske ændres
             Console.WriteLine($"{VoltValue} volt");
 
             Debug.WriteLine($"{VoltValue}%");
@@ -81,7 +167,7 @@ namespace SleepMonitor
                     var data = line.Split(','); // Assuming CSV format
                     observations.Add(new Observations
                     {
-                        ObservationStatus = bool.Parse(data[0]),
+                        //ObservationStatus = bool.Parse(data[0]),
                         ObservationCode = data[1],
                         ObservationIssued = DateTime.Parse(data[2]),
                         ObservationPerformer = data[3]
@@ -90,6 +176,7 @@ namespace SleepMonitor
             }
             return observations;
         }
+
         private void CalculateAndStoreAverage()
         {
             var lastFiveMinutesMeasurements = Measurements.Where(m => m.Timestamp >= DateTime.Now.AddMinutes(-5)).ToList();
@@ -121,21 +208,23 @@ namespace SleepMonitor
             Measurements = new List<Measurement>();
             AverageMeasurements = new List<FiveMinMeas>();
         }
+
+
+        public class FiveMinMeas
+        {
+            public DateTime Timestamp { get; set; }
+            public double AverageValue { get; set; }
+        }
+
+
+        public class Measurement
+        {
+            public DateTime Timestamp { get; set; }
+            public double Value { get; set; }
+        }
     }
-
-    public class FiveMinMeas
-    {
-        public DateTime Timestamp { get; set; }
-        public double AverageValue { get; set; }
-    }
-
-
-    public class Measurement
-    {
-        public DateTime Timestamp { get; set; }
-        public double Value { get; set; }
-    }
-
+}
+        */
     //______________________________________________________________________________________
 
     // KAN IKKE HUSKE OM DETTE BRUGES I SIMULERING - AFVENT SLETNING
@@ -146,4 +235,4 @@ namespace SleepMonitor
          this.bitValue = bitValue;
      }
     */
-}
+

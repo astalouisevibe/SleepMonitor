@@ -12,33 +12,32 @@ namespace SleepMonitor
     public class Program
     {
 
-        // DEN RIGTIGE KODE 
-
         static void Main(string[] args)
         {
+
             // Opret instanser af nødvendige objekter
             RaspberryPiDll _rpi = new RaspberryPiDll();
             Converter converter = new Converter();
             Adc adc = new Adc(0, 0, 0);
 
-        /*    if (!_rpi.Open())
-            {
-                Console.WriteLine("Error with open communication to Raspberry Pi");
-                return;
-            }
-        */
+            converter.ProcessFilesAndCreateObservations();
+        }
+    }
+}
 
-            double exampleValue = 512; // Example analog value
-            converter.ConvertBitToVolt(exampleValue);
+            /*    if (!_rpi.Open())
+                {
+                    Console.WriteLine("Error with open communication to Raspberry Pi");
+                    return;
+                }
+            */
+
+           // double exampleValue = 512; // Example analog value
+          //  converter.ConvertBitToVolt(exampleValue);
 
 
 
-            // Læs bitværdi fra ADC'en
-            double bitValue = adc.ReadDigitalValue();
-
-            // Konverter bitværdi til volt ved hjælp af ConvertBitToVolt metoden i Converter klassen
-            double voltValue = converter.ConvertBitToVolt(bitValue);
-
+           
 
 
             // Start læsning af sensorer ved at kalde StartReading metoden på Controller instansen
@@ -54,6 +53,7 @@ namespace SleepMonitor
             // SIMULERET KODE TIL AT TESTE
             // BN: pi, PW: raspberry, 
 
+            /*
             static void Main(string[] args)
             {
                 string csvFilePath = "..\\..\\..\\monimoni.csv";
@@ -223,6 +223,7 @@ namespace SleepMonitor
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             } */
+
 
 
 

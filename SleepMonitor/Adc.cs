@@ -9,8 +9,6 @@ using Iot.Device.Adc;
 
 namespace SleepMonitor
 {
-    // DEN RIGTIGE KLASSE TIL ADC
-
     public class Adc
     {
         private SpiDevice mcp3008;
@@ -23,29 +21,8 @@ namespace SleepMonitor
                 ClockFrequency = 500000, // Juster om nødvendigt
                 Mode = SpiMode.Mode0
             };
-         //   mcp3008 = SpiDevice.Create(settings);
+         //mcp3008 = SpiDevice.Create(settings);
             this.channel = channel;
-        }
-
-        public double ReadDigitalValue()
-        {
-            byte[] writeBuffer = new byte[3];
-            byte[] readBuffer = new byte[3];
-
-            writeBuffer[0] = 0x01; // Start bit
-            writeBuffer[1] = (byte)((8 + channel) << 4); // Single-ended mode, kanal valgt
-            writeBuffer[2] = 0x00; // "Don't care" byte
-
-          //  mcp3008.TransferFullDuplex(writeBuffer, readBuffer);
-
-            // Hver gang nyt bliver bygget der skal over på RaspberryPi, skal det oploades (build --> public selections --> Publish)
-            // publish / linux-arm : Indhold i mappen læggers over på RP
-            // "Fileshare" anvendes til at flere kan tilgå samme mappe
-            // Fileshare skal være en del af projektet - del af koden der skal lægges op
-            int result = ((readBuffer[1] & 0x03) << 8) + readBuffer[2];
-
-            Console.WriteLine($"Digital value: {result}");
-            return result;
         }
     }
 }
