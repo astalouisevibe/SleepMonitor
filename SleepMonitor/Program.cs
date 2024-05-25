@@ -18,7 +18,7 @@ namespace SleepMonitor
             // Opret instanser af nødvendige objekter
             RaspberryPiDll _rpi = new RaspberryPiDll();
             Converter converter = new Converter();
-            Adc adc = new Adc(0, 0, 0);
+            //Adc adc = new Adc(0, 0, 0);
 
             converter.ProcessFilesAndCreateObservations();
         }

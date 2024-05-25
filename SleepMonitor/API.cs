@@ -9,11 +9,10 @@ namespace SleepMonitor
 {
     internal class API
     {
-        private Controller controller;
-
-        public API(Controller controller)
+        Converter converter { get; set; }
+        public API(Converter converter)
         {
-            this.controller = controller;
+            this.converter = converter;
         }
 
         public void DataToJsonFile(string csvFilePath, string jsonFilePath)
