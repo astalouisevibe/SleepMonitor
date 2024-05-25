@@ -27,11 +27,7 @@ namespace testFileShare
                     FileStream newLocalStream = new FileStream(update, FileMode.Create);
                     downloader.Load(update, newLocalStream);
                 }
-                // Console.WriteLine("fejl" + filesOnline);
-                //FileStream newLocalStream = new FileStream(dataset, FileMode.Create); // Create a new file to save data in
-                //downloader.Load(filename, newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
-                //// streamreader --> **
-
+               
                 foreach (var update in UpdatedFiles)
                 {
                     string[] readData = File.ReadAllLines(update);
@@ -69,3 +65,7 @@ namespace testFileShare
         }
     }
 }
+// Console.WriteLine("fejl" + filesOnline);
+//FileStream newLocalStream = new FileStream(dataset, FileMode.Create); // Create a new file to save data in
+//downloader.Load(filename, newLocalStream); // Get data from the file specified (should match filename returned from uploader) 
+//// streamreader --> **
