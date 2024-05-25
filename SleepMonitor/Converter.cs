@@ -16,7 +16,9 @@ namespace SleepMonitor
 {
     public class Converter
     {
-        public void ProcessFilesAndCreateObservations()
+        List<Observations> oberservationList = new List<Observations>();
+
+        public void ProcessFilesAndCreateObservations(string jsonFilePath)
         {
             string filename = $"Data_{DateTime.Now:d}";
             List<string> UpdatedFiles = new List<string>();
@@ -41,7 +43,7 @@ namespace SleepMonitor
                     downloader.Load(update, newLocalStream);
                 }
 
-          
+                
                 foreach (var update in UpdatedFiles)
                 {
                     string[] readData = File.ReadAllLines(update);
@@ -57,13 +59,14 @@ namespace SleepMonitor
                                 ObservationPerformer = "Plejehjemspersonale"
 
                             };
+                            
+                            oberservationList.Add(observation);
 
                             if (number <= 143)
                             {
                                 Console.WriteLine("Borger er ikke i seng");
                                 break;
                                     }
-
                                 // Brug observationen efter behov
                                 Console.WriteLine($"Observation: {observation.ObservationCode}, Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
                         }
@@ -73,10 +76,20 @@ namespace SleepMonitor
                         }
                     }
                 }
+                WriteDataToJson(oberservationList, jsonFilePath);
+                Console.WriteLine("Data overført til JSON");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+        }
+        private void WriteDataToJson(List<Observations> observations, string filePath)
+        {
+            string json = JsonConvert.SerializeObject(observations, Formatting.Indented);
+            using (var writer = new StreamWriter(filePath, append: false))
+            {
+                writer.Write(json);
             }
         }
     }
