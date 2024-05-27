@@ -9,10 +9,7 @@ namespace SleepMonitor
 {
     internal class API 
     {
-       
-    
      
-        }
-
     }
+}
 
