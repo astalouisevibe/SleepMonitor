@@ -58,6 +58,39 @@ namespace testFileShare
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Console.WriteLine("fejl" + filesOnline);
 //FileStream newLocalStream = new FileStream(dataset, FileMode.Create); // Create a new file to save data in
 //downloader.Load(filename, newLocalStream); // Get data from the file specified (should match filename returned from uploader) 

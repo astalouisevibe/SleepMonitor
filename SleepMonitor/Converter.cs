@@ -12,18 +12,15 @@ using FileShare;
 using Newtonsoft.Json;
 using System.Diagnostics.Metrics;
 using UnitsNet;
-
 namespace SleepMonitor
 {
     public class Converter
     {
         List<Observations> oberservationList = new List<Observations>();
-
         public void ProcessFilesAndCreateObservations(string jsonFilePath)
         {
             string filename = $"Data_{DateTime.Now:d}";
             List<string> UpdatedFiles = new List<string>();
-
             try
             {
                 Downloader downloader = new Downloader("F24ST2GRP5_test"); // Create a Downloader instance with the same group name
@@ -35,19 +32,13 @@ namespace SleepMonitor
                     {
                         Console.WriteLine(file);
                         UpdatedFiles.Add(file);
-
-
                     }
                 }
-
                 foreach (var update in UpdatedFiles)
                 {
                     FileStream newLocalStream = new FileStream(update, FileMode.Create);
                     downloader.Load(update, newLocalStream);
-                    
                 }
-
-
                 foreach (var update in UpdatedFiles)
                 {
                     double totalSum = 0;
@@ -55,16 +46,14 @@ namespace SleepMonitor
                     string[] readData = File.ReadAllLines(update);
                     foreach (var data in readData)
                     {
-
                         if (double.TryParse(data, out double number))
                         {
                             totalSum += number;
                             numberOfData++;
                         }
                     }
-
                     var sum = totalSum / numberOfData;
-                    double procent = (sum / 408) * 100; // omregning til procent
+                    double procent = ((sum/408)*100); // omregning til procent  
                     string value = procent.ToString("F1");
 
                     if (numberOfData > 0)
@@ -75,28 +64,23 @@ namespace SleepMonitor
                             ObservationCode = value,
                             ObservationIssued = File.GetCreationTime(update), //DateTime.Now,
                             ObservationPerformer = "Plejehjemspersonale"
-
                         };
-
                         oberservationList.Add(observation);
-
                         if (procent <= 35) //bør være 35%
                         {
                             Console.WriteLine("Borger er ikke i seng");
                             break;
                         }
                         // Brug observationen efter behov
-                        Console.WriteLine($"Observation: {observation.ObservationCode}% , Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
+                        Console.WriteLine($"Observation: {observation.ObservationCode} % , Issued: {observation.ObservationIssued:f}, Performer: {observation.ObservationPerformer}");
                     }
                     else
                     {
-                        Console.WriteLine(" ");
+                        Console.WriteLine("Ingen data i filen");
                     }
                 }
-
                 WriteDataToJson(oberservationList, jsonFilePath);
                 Console.WriteLine("Data overført til JSON");
-
             }
             catch (Exception e)
             {
